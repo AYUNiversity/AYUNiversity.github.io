@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="contact, ctf*web*student">
+    <meta name="keywords" content="分类: 归纳整理, ctf*web*student">
     <meta name="description" content="早岁已知世事艰,仍许飞鸿荡云间">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>contact | 青云阁</title>
+    <title>分类: 归纳整理 | 青云阁</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -360,13 +360,7 @@
 
 </header>
 
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-<link rel="stylesheet" type="text/css" href="/css/barrager.css">
-<script src="/libs/valine/av-min.js"></script>
-<script src="/libs/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery.barrager.js"></script>
-
-<div class="bg-cover pd-header about-cover">
+    <div class="bg-cover pd-header about-cover">
     <div class="container">
     <div class="row">
     <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
@@ -421,80 +415,120 @@
     </div>
 </div>
 
-<style>
-    #send{
-        margin-bottom: 10px;
-        width: 49%;
-        background-color: #0ba360;
-    }
-    #clear{
-        margin-bottom: 10px;
-        width: 49%;
-        background-color: #e7c65c;
-    }
-    p{
-        text-align: center;
-    }
-</style>
 <main class="content">
-    <div id="contact" class="container chip-container">
-        <div class="card">
-            <div class="card-content">
-                <div class="tag-title center-align">
-                    <i class="fas fa-comments"></i>&nbsp;&nbsp;留言板
-                </div>
+
+    
+
+<div id="category-cloud" class="container chip-container">
+    <div class="card">
+        <div class="card-content">
+            <div class="tag-title center-align">
+                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
+            </div>
+            <div class="tag-chips">
+                
+                
+                
+                <a href="/categories/%E5%BD%92%E7%BA%B3%E6%95%B4%E7%90%86/" title="归纳整理: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-active "
+                            style="background-color: #F9EBEA;">归纳整理
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="序列化与反序列化: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F5EEF8;">序列化与反序列化
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" title="文件上传: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #D5F5E3;">文件上传
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
                 
             </div>
-            <!--valine评论弹幕-->
-            
         </div>
-
-        <!--其他评论card-->
-        <div class="card">
-            
-                <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
     </div>
-    <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'Ov23liqpRCaMYrbZl9QE',
-        clientSecret: '2c85ab1376564dd1afa4e272a158bdf7b743f9bc',
-        repo: '评论',
-        owner: 'AYUNiversity',
-        admin: "AYUNiversity",
-        id: '2020-02-23T19-37-07',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
 
-    gitalk.render('gitalk-container');
-</script>
+    
 
+    <article id="articles" class="container articles">
+        <div class="row tags-posts">
             
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2025/04/16/md5%E6%95%B4%E7%90%86/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/img/loading.gif" data-original="/medias/featureimages/9.jpg" class="responsive-img" alt="phar反序列化漏洞">
+                            
+                            <span class="card-title">phar反序列化漏洞</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                md5的常规payload整理，如有错误，请佬指出
+一.md5弱比较比较
+1.0e绕过
+部分字符串经过md5加密之后为0exxxx的格式，相当于0的xxxx次方，所以无论xxxx是什么，函数判断时
 
+会认为相等。
+例如
+a=QNKCDZO,
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-16
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E5%BD%92%E7%BA%B3%E6%95%B4%E7%90%86/" class="post-category">
+                                    归纳整理
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/md5%E6%AF%94%E8%BE%83/">
+                            <span class="chip bg-color">md5比较</span>
+                        </a>
+                        
+                        <a href="/tags/Web/">
+                            <span class="chip bg-color">Web</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
             
-
-            
-
-            
-
-            
-
-            
-
-            
-
         </div>
-    </div>
+    </article>
 </main>
+
+
 
 
     <footer class="page-footer bg-color">
