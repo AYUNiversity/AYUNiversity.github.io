@@ -30,8 +30,8 @@
         width: 90%;
         margin: 0 auto;
         max-width: 1250px;
-        word-wrap: break-word;    /* 自动换行，避免长单词或链接溢出 */
-        word-break: break-all;    /* 强制单词换行 */
+        word-wrap: break-word !important;   /* 强制自动换行 */
+        word-break: break-all !important;   /* 强制单词换行 */
     }
     
 }
