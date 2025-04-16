@@ -3,11 +3,11 @@
   <title>青云阁</title>
   
   <subtitle>YUNiversity的个人博客</subtitle>
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://example.com/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
-  <updated>2025-04-16T09:17:43.451Z</updated>
-  <id>http://example.com/</id>
+  <link href="https://example.com/"/>
+  <updated>2025-04-16T11:18:31.308Z</updated>
+  <id>https://example.com/</id>
   
   <author>
     <name>YUNiversity</name>
@@ -17,24 +17,57 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://example.com/2025/04/16/php%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9B%E9%98%B6--phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
-    <id>http://example.com/2025/04/16/php%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9B%E9%98%B6--phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</id>
-    <published>2025-04-16T09:19:04.785Z</published>
-    <updated>2025-04-16T09:17:43.451Z</updated>
+    <title>Hello World</title>
+    <link href="https://example.com/2025/04/16/hello-world/"/>
+    <id>https://example.com/2025/04/16/hello-world/</id>
+    <published>2025-04-16T11:04:35.000Z</published>
+    <updated>2025-04-16T11:18:31.308Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;hr&gt;
-&lt;p&gt;title： php序列化与反序列化进阶–phar反序列化&lt;br&gt;top： true&lt;br&gt;categories： 知识归纳&lt;br&gt;tags：-</summary>
+    <summary type="html">&lt;p&gt;YUNiversity测试&lt;/p&gt;
+&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a</summary>
         
       
     
     
     
+    
+  </entry>
+  
+  <entry>
+    <title>phar反序列化漏洞</title>
+    <link href="https://example.com/2025/04/16/phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/"/>
+    <id>https://example.com/2025/04/16/phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/</id>
+    <published>2025-04-16T11:04:35.000Z</published>
+    <updated>2025-04-16T11:26:44.821Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在打tgctf的时候碰到了文件上传+phar反序列化组合拳，之前有所了解但并没有掌握，趁复现好好的学习一下&lt;/p&gt;
+&lt;p&gt;先放上tg的源码&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-language-python&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="序列化与反序列化" scheme="https://example.com/categories/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+    
+    <category term="文件上传" scheme="https://example.com/categories/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
+    
+    
+    <category term="phar+文件上传" scheme="https://example.com/tags/phar-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
+    
+    <category term="tgctf2025" scheme="https://example.com/tags/tgctf2025/"/>
+    
+    <category term="Web" scheme="https://example.com/tags/Web/"/>
     
   </entry>
   
