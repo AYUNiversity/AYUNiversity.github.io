@@ -635,9 +635,9 @@ $phar->addFromString("test.txt", "test"); //添加要压缩的文件
 $phar->stopBuffering();
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后直接运行，这边报错的话，需要改一下php.ini里的readonly，把ON改成OFF  </p>
-<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1744786978281-9ff062b9-8007-47ff-967e-18786378edc0.png"></p>
+<p><img src="/img/loading.gif" data-original="D:\HexoBlog\source_posts\phar反序列化漏洞\1744786978281-9ff062b9-8007-47ff-967e-18786378edc0.png"></p>
 <p>第一个红框是文件头，第二个红框是setMetadata，而且如果php文件里有读取文件的函数，他一定会把setMetadata里的内容反序列化。</p>
-<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1744787022620-fefa5e19-e924-409f-8ec1-c46ebae47a67.png"></p>
+<p><img src="/img/loading.gif" data-original="D:\HexoBlog\source_posts\phar反序列化漏洞\1744787022620-fefa5e19-e924-409f-8ec1-c46ebae47a67.png"></p>
 <p>更改后缀他的文件头是不变的，所以可以修改成任意的后缀（生成之后）</p>
 
                 
