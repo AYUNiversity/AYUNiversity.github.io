@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta name="keywords" content="nodejs原型链污染, ctf*web*student">
     <meta name="description" content="补充constructor.prototype可以代替**proto**
-前置知识先来了解一下Nodejs和JavaScipt和JSON的区别吧，一直也是懵懵懂懂
-如果没有node，那么我们的JavaScript代码则由浏览器中的JavaS">
+前置知识Nodejs和JavaScipt和JSON的区别先来了解一下Nodejs和JavaScipt和JSON的区别吧，一直也是懵懵懂懂
+如果没有node，那么我们的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -52,9 +52,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css">
-<meta name="generator" content="Hexo 7.3.0">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="青云阁" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="青云阁" type="application/atom+xml">
 </head>
 
 
@@ -471,7 +471,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p><strong>constructor.prototype</strong>可以代替**<strong>proto</strong>**</p>
-<h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><p>先来了解一下<strong>Nodejs和JavaScipt和JSON的区别</strong>吧，一直也是懵懵懂懂</p>
+<h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><h5 id="Nodejs和JavaScipt和JSON的区别"><a href="#Nodejs和JavaScipt和JSON的区别" class="headerlink" title="Nodejs和JavaScipt和JSON的区别"></a>Nodejs和JavaScipt和JSON的区别</h5><p>先来了解一下<strong>Nodejs和JavaScipt和JSON的区别</strong>吧，一直也是懵懵懂懂</p>
 <p>如果没有node，那么我们的JavaScript代码则由浏览器中的<strong>JavaScript解析器</strong>进行解析。几乎所有的浏览器都配备了JavaScript的解析功能（最出名的就是google的v8）， 这也是为什么我们能在f12中直接执行JavaScript的原因</p>
 <p>而Nodejs则是由这个解析器单独从浏览器中拿出来，并进行了一系列的处理，最后成为了一个可以在服务端运行JavaScript的环境</p>
 <p>JSON是JavaScript的对象表示方法，它表示的是声明对象的一种格式， 由于我们从前端接收到的数据基本都是字符串，因此在服务端如果要将这些字符串处理为其他格式，比如对象，就需要用到JSON了。</p>
@@ -502,7 +502,7 @@ var myMother=new person("Sally","Rally",48,"green");
 这种方法先创建构造函数 再实例化构造函数 构造函数function也属于Object 
 如果对这里为什么属于Object而不属于Function有疑问请继续阅读 下面会解释
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>既然是通过实例化Object来创建对象或创建构造函数，在JavaScript中有两个很特殊的对象，Function() 和 Object() ，它们两个既是构造函数也是对象，作为对象是不是应该有一个“类”去作为他们的模板呢？</p>
+<h5 id="污染前置知识"><a href="#污染前置知识" class="headerlink" title="污染前置知识"></a>污染前置知识</h5><p>既然是通过实例化Object来创建对象或创建构造函数，在JavaScript中有两个很特殊的对象，Function() 和 Object() ，它们两个既是构造函数也是对象，作为对象是不是应该有一个“类”去作为他们的模板呢？</p>
 <p>对于Object()来说，要声明这么一个构造函数我们可以使用关键字function来创建 。（在底层 使用function创建一个函数 其实就相当于这个过程）</p>
 <pre class="line-numbers language-language-python"><code class="language-language-python">function Object()
 {
@@ -851,12 +851,12 @@ console.log(o3.b)
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Web/">
-                        <span class="chip bg-color">Web</span>
-                    </a>
-                    
                     <a href="/tags/md5%E6%AF%94%E8%BE%83/">
                         <span class="chip bg-color">md5比较</span>
+                    </a>
+                    
+                    <a href="/tags/Web/">
+                        <span class="chip bg-color">Web</span>
                     </a>
                     
                 </div>
