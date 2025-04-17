@@ -6,7 +6,7 @@
   <link href="https://example.com/atom.xml" rel="self"/>
   
   <link href="https://example.com/"/>
-  <updated>2025-04-17T02:46:45.973Z</updated>
+  <updated>2025-04-17T03:29:45.493Z</updated>
   <id>https://example.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python原型链污染</title>
+    <link href="https://example.com/2025/04/17/python%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/"/>
+    <id>https://example.com/2025/04/17/python%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/</id>
+    <published>2025-04-17T03:28:27.000Z</published>
+    <updated>2025-04-17T03:29:45.493Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;基础payload&quot;&gt;&lt;a href=&quot;#基础payload&quot; class=&quot;headerlink&quot; title=&quot;基础payload&quot;&gt;&lt;/a&gt;基础payload&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;直接污染static目录&lt;/strong&gt;&lt;/p&gt;
+&lt;pre</summary>
+        
+      
+    
+    
+    
+    <category term="原型链污染" scheme="https://example.com/categories/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/"/>
+    
+    
+    <category term="Web" scheme="https://example.com/tags/Web/"/>
+    
+    <category term="python原型链污染" scheme="https://example.com/tags/python%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/"/>
+    
+  </entry>
   
   <entry>
     <title>nodejs原型链污染</title>

