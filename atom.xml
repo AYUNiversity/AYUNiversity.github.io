@@ -6,7 +6,7 @@
   <link href="https://example.com/atom.xml" rel="self"/>
   
   <link href="https://example.com/"/>
-  <updated>2025-04-16T15:30:25.998Z</updated>
+  <updated>2025-04-17T02:46:45.973Z</updated>
   <id>https://example.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nodejs原型链污染</title>
+    <link href="https://example.com/2025/04/17/nodejs%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/"/>
+    <id>https://example.com/2025/04/17/nodejs%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/</id>
+    <published>2025-04-17T02:37:03.000Z</published>
+    <updated>2025-04-17T02:46:45.973Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;补充&quot;&gt;&lt;a href=&quot;#补充&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="原型链污染" scheme="https://example.com/categories/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/"/>
+    
+    
+    <category term="Web" scheme="https://example.com/tags/Web/"/>
+    
+    <category term="nodejs原型链污染" scheme="https://example.com/tags/nodejs%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/"/>
+    
+  </entry>
   
   <entry>
     <title>md5整理</title>
