@@ -6,7 +6,7 @@
   <link href="https://example.com/atom.xml" rel="self"/>
   
   <link href="https://example.com/"/>
-  <updated>2025-05-09T00:37:27.032Z</updated>
+  <updated>2025-05-09T01:04:36.361Z</updated>
   <id>https://example.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Jinjia2-SSTI请求头回显</title>
+    <link href="https://example.com/2025/04/29/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/"/>
+    <id>https://example.com/2025/04/29/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/</id>
+    <published>2025-04-29T15:04:18.000Z</published>
+    <updated>2025-05-09T01:04:36.361Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;主要还是payload对于原理不进行过多描述&lt;/p&gt;
+&lt;h1 id=&quot;Server回显&quot;&gt;&lt;a href=&quot;#Server回显&quot; class=&quot;headerlink&quot; title=&quot;Server回显&quot;&gt;&lt;/a&gt;Server回显&lt;/h1&gt;&lt;p&gt;一直听&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="ssti" scheme="https://example.com/categories/ssti/"/>
+    
+    
+    <category term="SSTI" scheme="https://example.com/tags/SSTI/"/>
+    
+    <category term="Web" scheme="https://example.com/tags/Web/"/>
+    
+  </entry>
   
   <entry>
     <title>PHP_=7.4.21 Development Server源码泄露漏洞</title>
@@ -39,37 +67,9 @@
     <category term="php特性" scheme="https://example.com/categories/php%E7%89%B9%E6%80%A7/"/>
     
     
+    <category term="Web" scheme="https://example.com/tags/Web/"/>
+    
     <category term="PHP" scheme="https://example.com/tags/PHP/"/>
-    
-    <category term="Web" scheme="https://example.com/tags/Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Jinjia2-SSTI请求头回显</title>
-    <link href="https://example.com/2025/04/29/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/"/>
-    <id>https://example.com/2025/04/29/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/</id>
-    <published>2025-04-29T15:04:18.000Z</published>
-    <updated>2025-05-09T00:58:52.109Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;主要还是payload对于原理不进行过多描述&lt;/p&gt;
-&lt;h1 id=&quot;Server回显&quot;&gt;&lt;a href=&quot;#Server回显&quot; class=&quot;headerlink&quot; title=&quot;Server回显&quot;&gt;&lt;/a&gt;Server回显&lt;/h1&gt;&lt;p&gt;一直听&lt;font</summary>
-        
-      
-    
-    
-    
-    <category term="ssti" scheme="https://example.com/categories/ssti/"/>
-    
-    
-    <category term="Web" scheme="https://example.com/tags/Web/"/>
-    
-    <category term="SSTI" scheme="https://example.com/tags/SSTI/"/>
     
   </entry>
   
