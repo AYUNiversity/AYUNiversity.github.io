@@ -6,7 +6,7 @@
   <link href="https://example.com/atom.xml" rel="self"/>
   
   <link href="https://example.com/"/>
-  <updated>2025-05-09T01:13:30.002Z</updated>
+  <updated>2025-05-09T11:42:25.525Z</updated>
   <id>https://example.com/</id>
   
   <author>
@@ -15,6 +15,110 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SSRF打Fastcgi</title>
+    <link href="https://example.com/2025/05/09/SSRF%E6%89%93Fastcgi/"/>
+    <id>https://example.com/2025/05/09/SSRF%E6%89%93Fastcgi/</id>
+    <published>2025-05-09T11:40:12.000Z</published>
+    <updated>2025-05-09T11:42:25.525Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;FastCGI协议&quot;&gt;&lt;a href=&quot;#FastCGI协议&quot; class=&quot;headerlink&quot; title=&quot;FastCGI协议&quot;&gt;&lt;/a&gt;&lt;strong&gt;FastCGI协议&lt;/strong&gt;&lt;/h3&gt;&lt;h6 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>SSRF漏洞攻击Redis</title>
+    <link href="https://example.com/2025/05/09/SSRF%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BBRedis/"/>
+    <id>https://example.com/2025/05/09/SSRF%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BBRedis/</id>
+    <published>2025-05-09T11:28:54.000Z</published>
+    <updated>2025-05-09T11:39:53.031Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Redis-简介&quot;&gt;&lt;a href=&quot;#Redis-简介&quot; class=&quot;headerlink&quot; title=&quot;Redis 简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;Redis 简介&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;Redis（Remote Dictionary</summary>
+        
+      
+    
+    
+    
+    <category term="SSRF" scheme="https://example.com/categories/SSRF/"/>
+    
+    
+    <category term="Web" scheme="https://example.com/tags/Web/"/>
+    
+    <category term="SSRF漏洞攻击Redis" scheme="https://example.com/tags/SSRF%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BBRedis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python沙箱逃逸</title>
+    <link href="https://example.com/2025/05/09/python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/"/>
+    <id>https://example.com/2025/05/09/python%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/</id>
+    <published>2025-05-09T11:08:15.000Z</published>
+    <updated>2025-05-09T11:45:12.923Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;strong&gt;所谓沙箱逃逸就是绕过模拟的python终端，最终实现命令执行&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Pyjail基础解法，payload构造&quot;&gt;&lt;a href=&quot;#Pyjail基础解法，payload构造&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="沙箱逃逸" scheme="https://example.com/categories/%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/"/>
+    
+    
+    <category term="Web" scheme="https://example.com/tags/Web/"/>
+    
+    <category term="pyjail" scheme="https://example.com/tags/pyjail/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vm沙箱逃逸</title>
+    <link href="https://example.com/2025/05/09/vm%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/"/>
+    <id>https://example.com/2025/05/09/vm%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/</id>
+    <published>2025-05-09T11:00:55.000Z</published>
+    <updated>2025-05-09T11:09:19.229Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;如果想要实现沙箱的隔离作用，我们是不是可以创建一个新的作用域，让代码在这个新的作用域里面去运行，这样就和其他的作用域进行了隔离，这也就是vm模块运行的原理，先来了解几个常用的vm模块的API。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;vm.runinThisContext(code)</summary>
+        
+      
+    
+    
+    
+    <category term="沙箱逃逸" scheme="https://example.com/categories/%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/"/>
+    
+    
+    <category term="Web" scheme="https://example.com/tags/Web/"/>
+    
+    <category term="vm沙箱逃逸" scheme="https://example.com/tags/vm%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/"/>
+    
+  </entry>
   
   <entry>
     <title>Jinjia2-SSTI请求头回显</title>
@@ -38,9 +142,9 @@
     <category term="ssti" scheme="https://example.com/categories/ssti/"/>
     
     
-    <category term="SSTI" scheme="https://example.com/tags/SSTI/"/>
-    
     <category term="Web" scheme="https://example.com/tags/Web/"/>
+    
+    <category term="SSTI" scheme="https://example.com/tags/SSTI/"/>
     
   </entry>
   
@@ -155,6 +259,34 @@
     <category term="Web" scheme="https://example.com/tags/Web/"/>
     
     <category term="nodejs原型链污染" scheme="https://example.com/tags/nodejs%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gopher协议在SSRF漏洞中的深入研究</title>
+    <link href="https://example.com/2025/04/16/Gopher%E5%8D%8F%E8%AE%AE%E5%9C%A8SSRF%E6%BC%8F%E6%B4%9E%E4%B8%AD%E7%9A%84%E6%B7%B1%E5%85%A5%E7%A0%94%E7%A9%B6/"/>
+    <id>https://example.com/2025/04/16/Gopher%E5%8D%8F%E8%AE%AE%E5%9C%A8SSRF%E6%BC%8F%E6%B4%9E%E4%B8%AD%E7%9A%84%E6%B7%B1%E5%85%A5%E7%A0%94%E7%A9%B6/</id>
+    <published>2025-04-16T15:04:18.000Z</published>
+    <updated>2025-05-09T11:39:37.470Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;一直以来对于Gopher协议我都是懵懵懂懂，趁学习ssrf攻击redis，再深入研究一下&lt;/p&gt;
+&lt;h2 id=&quot;一、什么是gopher协议？&quot;&gt;&lt;a href=&quot;#一、什么是gopher协议？&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="SSRF" scheme="https://example.com/categories/SSRF/"/>
+    
+    
+    <category term="Gopher协议在SSRF漏洞中的深入研究" scheme="https://example.com/tags/Gopher%E5%8D%8F%E8%AE%AE%E5%9C%A8SSRF%E6%BC%8F%E6%B4%9E%E4%B8%AD%E7%9A%84%E6%B7%B1%E5%85%A5%E7%A0%94%E7%A9%B6/"/>
+    
+    <category term="Web" scheme="https://example.com/tags/Web/"/>
     
   </entry>
   
