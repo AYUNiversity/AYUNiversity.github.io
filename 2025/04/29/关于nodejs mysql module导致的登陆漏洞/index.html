@@ -486,7 +486,7 @@ pool.query(
 <p>我们现在将改变<code>password</code>参数到<code>password[password]</code>使参数为<code>Object</code>而不是<code>String</code>. </p>
 <p>我们就可以访问管理员帐户</p>
 <p> 或者也可以将数据作为 JSON 传递并绕过身份验证</p>
-<p>![](关于nodejs mysql module导致的登陆漏洞\1745563696799-2cdd5331-7ced-4369-8a76-83318b1849ff.png)</p>
+<p>![](关于nodejs mysql module导致的登陆漏洞/1745563696799-2cdd5331-7ced-4369-8a76-83318b1849ff.png)</p>
 <p> 这是由于某些类型(特别是对象类型)<strong>quoted identifiers</strong>在被转义函数转义时包含引用的标识符。引用的标识符用于指示数据库、表格、列或此类。有了这个,我们可以引用查询中的其他表或列。  </p>
 <p>将<code>password = </code>obj_key_1<code> </code>更改为<code>password = </code>password``</p>
 <p>自引用的标识符<code>password</code>被视为一列,它最终会成为<code>password = password</code></p>
@@ -494,10 +494,10 @@ pool.query(
 <p>因此,当密码参数传递为<code>{'password': 1}</code>它最终会转化为``password<code>=1</code>最后绕过了身份验证逻辑。</p>
 <p>所以在面对nodejs和mysql的登陆时我们可以<br>username[username]=1&amp;password[password]=1</p>
 <p>来登录</p>
-<p>![](关于nodejs mysql module导致的登陆漏洞\1745564157565-c3c4074a-59f0-4837-ae77-33949227a7ab.png)</p>
+<p>![](关于nodejs mysql module导致的登陆漏洞/1745564157565-c3c4074a-59f0-4837-ae77-33949227a7ab.png)</p>
 <p>或者<br>username=admin&amp;password[password]=1</p>
 <p>登录特定用户如admin</p>
-<p>![](关于nodejs mysql module导致的登陆漏洞\1745564201946-966e24f7-d3c3-407c-899e-67cade203047.png)</p>
+<p>![](关于nodejs mysql module导致的登陆漏洞/1745564201946-966e24f7-d3c3-407c-899e-67cade203047.png)</p>
 <p><strong>防御方法</strong></p>
 <p>解决方法 1:在创建连接时添加 stringifyObjects 选项</p>
 <p>添加<code>"stringifyObjects":true</code>调用时的选项<code>mysql.createConnection</code>最终会阻止所有意想不到的行为,当<code>Object</code>在参数中传递。</p>
