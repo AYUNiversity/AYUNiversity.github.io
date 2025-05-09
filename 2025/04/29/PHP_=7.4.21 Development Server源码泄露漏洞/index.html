@@ -439,7 +439,7 @@ php -S loc">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    553
+                    591
                 </div>
                 
 
@@ -477,10 +477,10 @@ php -S loc">
 <p>php -S localhost:8080  </p>
 <p>通过<code>php -S</code>开起的内置WEB服务器存在源码泄露漏洞，可以将PHP文件作为静态文件直接输出源码  </p>
 <p>随意访问一个不存在的php，触发以下页面，这算是php -S启动服务的一个标志：（页面来自封神台的图床题）</p>
-<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1745475646348-eadb9113-2888-4365-b623-c1760e25cf3e.png"></p>
+<p>![](PHP_=7.4.21 Development Server源码泄露漏洞\1745475646348-eadb9113-2888-4365-b623-c1760e25cf3e.png)</p>
 <p>我们这里就结合这道题来介绍这个漏洞的利用</p>
 <p>我们bp抓包发送repeater来准备读取unzip.php的源码，一定能要关闭repeater的自动更新Content-Length  以及显示回车换行，方便数据包的构造。</p>
-<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1745476282943-e7089b83-167d-4ec0-a8bc-79671a3362f5.png"></p>
+<p>![](PHP_=7.4.21 Development Server源码泄露漏洞\1745476282943-e7089b83-167d-4ec0-a8bc-79671a3362f5.png)</p>
 <p>这里就读取到了源码但是不在接着往下写，想往下看这题去看我的wp</p>
 <p>这里先上poc并附上解释</p>
 <pre class="line-numbers language-language-http"><code class="language-language-http">GET /unzip.php HTTP/1.1
@@ -931,7 +931,7 @@ GET /AAA.txt Http/1.1
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">8.4k</span>
+                        class="white-color">8.5k</span>
             
             
             

