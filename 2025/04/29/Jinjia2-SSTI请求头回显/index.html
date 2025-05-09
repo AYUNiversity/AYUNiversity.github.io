@@ -53,9 +53,9 @@ Server回显一直听Mash1r0.师傅讲请求头回显，第五届封神台也是
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css">
-<meta name="generator" content="Hexo 7.3.0">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="青云阁" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="青云阁" type="application/atom+xml">
 </head>
 
 
@@ -476,13 +476,13 @@ Server回显一直听Mash1r0.师傅讲请求头回显，第五届封神台也是
 <p>这个利用方式比较新，据说只要是打jaijia2的ssti应该都能打。</p>
 <p>我们先看看回包的结构：</p>
 <p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1745469263731-cc4b17de-49e1-40a5-a15f-80503c522f99.png"><br>注意这里的Serverr，Data回显,对于原出题人的说法是在flask中存在一个Server头：</p>
-<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1745470661475-190d97c2-baac-4dcc-9d22-1d6fda36904b.png"></p>
+<p><img src="/img/loading.gif" data-original="D:\HexoBlog\source\Jinjia2-SSTI请求头回显\1745470661475-190d97c2-baac-4dcc-9d22-1d6fda36904b.png"></p>
 <p>然后这个sever头有两个部分server_version和sys_version：	</p>
-<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1745470686196-2d1e7446-111d-4606-83f4-dca594425120.png"></p>
+<p><img src="/img/loading.gif" data-original="D:\HexoBlog\source\Jinjia2-SSTI请求头回显\1745470686196-2d1e7446-111d-4606-83f4-dca594425120.png"></p>
 <p>这两个值是WSGIRequestHandler类中的属性，这里可以更改环境中的server_version或者sys_version的值来获取回显。</p>
 <p>中间的代码跟进不再演示</p>
 <p>server_version调用的是WSGIRequestHandler类的server_version()方法：</p>
-<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1745500454369-c17b9c1d-7df9-4c32-ba0e-badb996e3478.png"></p>
+<p><img src="/img/loading.gif" data-original="D:\HexoBlog\source\Jinjia2-SSTI请求头回显\1745500454369-c17b9c1d-7df9-4c32-ba0e-badb996e3478.png"></p>
 <p>利用点就是在这里，这里的方法为什么可以利用，重点在于它的@property装饰器，这个的介绍如下：</p>
 <ul>
 <li>这是一个装饰器，使用这个装饰器，可以将一个方法转换为属性，也就是说使用这个装饰器的方法，可以使其在访问时可以像访问属性一样，它把方法包装成属性，让方法可以以属性的形式被访问或调用。</li>
