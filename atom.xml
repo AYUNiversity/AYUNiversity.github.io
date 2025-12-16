@@ -6,7 +6,7 @@
   <link href="https://example.com/atom.xml" rel="self"/>
   
   <link href="https://example.com/"/>
-  <updated>2025-12-16T13:47:25.161Z</updated>
+  <updated>2025-12-16T14:34:05.544Z</updated>
   <id>https://example.com/</id>
   
   <author>
@@ -17,24 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="https://example.com/2025/12/16/LD_PRELOAD/"/>
-    <id>https://example.com/2025/12/16/LD_PRELOAD/</id>
-    <published>2025-12-16T13:47:25.160Z</published>
-    <updated>2025-12-16T13:47:25.161Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>LD_PRELOAD</title>
     <link href="https://example.com/2025/12/16/LD-PRELOAD/"/>
     <id>https://example.com/2025/12/16/LD-PRELOAD/</id>
     <published>2025-12-16T13:04:06.000Z</published>
-    <updated>2025-12-16T13:48:30.899Z</updated>
+    <updated>2025-12-16T14:34:05.544Z</updated>
     
     
       
@@ -153,9 +140,9 @@
     <category term="ssti" scheme="https://example.com/categories/ssti/"/>
     
     
-    <category term="Web" scheme="https://example.com/tags/Web/"/>
-    
     <category term="SSTI" scheme="https://example.com/tags/SSTI/"/>
+    
+    <category term="Web" scheme="https://example.com/tags/Web/"/>
     
   </entry>
   
@@ -295,9 +282,9 @@
     <category term="SSRF" scheme="https://example.com/categories/SSRF/"/>
     
     
-    <category term="Gopher协议在SSRF漏洞中的深入研究" scheme="https://example.com/tags/Gopher%E5%8D%8F%E8%AE%AE%E5%9C%A8SSRF%E6%BC%8F%E6%B4%9E%E4%B8%AD%E7%9A%84%E6%B7%B1%E5%85%A5%E7%A0%94%E7%A9%B6/"/>
-    
     <category term="Web" scheme="https://example.com/tags/Web/"/>
+    
+    <category term="Gopher协议在SSRF漏洞中的深入研究" scheme="https://example.com/tags/Gopher%E5%8D%8F%E8%AE%AE%E5%9C%A8SSRF%E6%BC%8F%E6%B4%9E%E4%B8%AD%E7%9A%84%E6%B7%B1%E5%85%A5%E7%A0%94%E7%A9%B6/"/>
     
   </entry>
   

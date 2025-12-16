@@ -13,13 +13,13 @@
 <meta property="og:site_name" content="青云阁">
 <meta property="og:description" content="M申给我发了两道题，其中一道就是关于LD_PRELOAD的，之前面vn的时候，infer问了我相关的问题没答上来，正好学习一下">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/52815563/1761710115065-b8346f38-3f02-4cbd-90fa-d6efed6cba36.png">
+<meta property="og:image" content="https://example.com/LD-PRELOAD/1.png">
 <meta property="article:published_time" content="2025-12-16T13:04:06.000Z">
-<meta property="article:modified_time" content="2025-12-16T13:48:30.899Z">
+<meta property="article:modified_time" content="2025-12-16T14:34:05.544Z">
 <meta property="article:author" content="YUNiversity">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2025/png/52815563/1761710115065-b8346f38-3f02-4cbd-90fa-d6efed6cba36.png">
+<meta name="twitter:image" content="https://example.com/LD-PRELOAD/1.png">
     
     
       
@@ -88,8 +88,6 @@
     <br/>
     <span id="actions">
       <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2025/12/16/LD_PRELOAD/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="下一篇" href="/2025/05/09/SSRF%E6%89%93Fastcgi/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -221,7 +219,7 @@ int getuid()
 <p>编译<br>gcc -fPIC -shared -o evil.so ld.c -ldl</p>
 <p>再运行查看是否执行<br>php system.php</p>
 <p>cat res</p>
-<p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1761710115065-b8346f38-3f02-4cbd-90fa-d6efed6cba36.png"></p>
+<p><img src="/img/loading.gif" data-original="/LD-PRELOAD/1.png"></p>
 <p>最终成功执行</p>
 <h1 id="TXGzp">劫持共享库</h1>
 
@@ -240,14 +238,13 @@ __attribute__((destructor)) void preload_exit() {
 <p>作用有点类似php的那两个魔术方法，其他的这里就先不提</p>
 <p>那么思路就很清晰__attribute__((constructor)) 在加载共享库时就会运行，只要编写一个含__attribute__((constructor)) 函数的共享库，然后在PHP中设置LD_PRELOAD环境变量，并且有一个能 fork 一个子进程并触发加载共享库的函数被执行，那么就能执行任意代码  </p>
 <details class="lake-collapse"><summary id="ue8fc2a28"><span class="ne-text">这里放一些相关的函数</span></summary><h6 id="vGiUD"><span class="ne-text">一、直接创建子进程（</span><code class="ne-code"><span class="ne-text">fork</span></code><span class="ne-text"> 相关）</span></h6><p id="u3b9be181" class="ne-p"><code class="ne-code"><span class="ne-text">fork()</span></code></p><p id="u029241ca" class="ne-p"><code class="ne-code"><span class="ne-text">vfork()</span></code></p><h6 id="MsKBc"><span class="ne-text">二、加载新程序（</span><code class="ne-code"><span class="ne-text">exec</span></code><span class="ne-text"> 系列）</span></h6><p id="ufe26a706" class="ne-p"><code class="ne-code"><strong><span class="ne-text">execve(path, argv, envp)</span></strong></code><span class="ne-text">（系统调用）  </span></p><p id="u2476d1c2" class="ne-p"><code class="ne-code"><strong><span class="ne-text">execl(path, arg0, arg1, ..., NULL)</span></strong></code></p><p id="u9f4753d4" class="ne-p"><code class="ne-code"><strong><span class="ne-text">execvp(file, argv)</span></strong></code></p><h6 id="GYr1U"><span class="ne-text">三、创建线程（间接影响共享库）</span></h6><p id="u2541fe15" class="ne-p"><code class="ne-code"><strong><span class="ne-text">pthread_create()</span></strong></code></p><h6 id="Xf5Sa"><span class="ne-text">四、显式加载共享库的函数</span></h6><p id="u3cc90108" class="ne-p"><code class="ne-code"><strong><span class="ne-text">dlopen(const char *filename, int flag)</span></strong></code></p><p id="u576186ff" class="ne-p"><code class="ne-code"><strong><span class="ne-text">system(const char *command)</span></strong></code></p></details>
+总结：触发共享库加载的关键场景
 
-<p>:::tips<br>总结：触发共享库加载的关键场景</p>
 <ol>
-<li><code>**exec**</code>** 系列函数**：替换进程时加载新程序的依赖库，是最主要的触发方式（依赖动态链接器）。</li>
-<li><code>**system**</code>** 函数**：内部通过 <code>fork+exec</code> 执行命令，间接触发子进程的库加载。</li>
-<li><code>**dlopen**</code>** 函数**：显式在当前进程（或子进程）中加载共享库。</li>
+<li><code>**exec**</code>系列函数：替换进程时加载新程序的依赖库，是最主要的触发方式（依赖动态链接器）。</li>
+<li><code>**system**</code>*函数：内部通过 <code>fork+exec</code> 执行命令，间接触发子进程的库加载。</li>
+<li><code>**dlopen**</code>函数：显式在当前进程（或子进程）中加载共享库。</li>
 </ol>
-<p>:::</p>
 <p>这里放一道M申给的题目</p>
 <pre class="line-numbers language-language-php"><code class="language-language-php"><?php
 highlight_file(__FILE__);
