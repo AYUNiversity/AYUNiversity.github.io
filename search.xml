@@ -98,33 +98,6 @@
     
     
     <entry>
-      <title>PHP_=7.4.21 Development Server源码泄露漏洞</title>
-      <link href="/2025/04/29/PHP_=7.4.21%20Development%20Server%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/"/>
-      <url>/2025/04/29/PHP_=7.4.21%20Development%20Server%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</url>
-      
-        <content type="html"><![CDATA[<p>在复现第八届封神台ctf第一次接触到了<code>php -S服务启动后造成代码泄露</code>的漏洞</p><p>PHP从5.4开始，就提供了一个内置的web服务器，主要是用来做本地的开发用的。<br>前提：php已经加入到本地电脑的环境变量中</p><p>cd 项目目录</p><p>php -S localhost:8080  </p><p>通过<code>php -S</code>开起的内置WEB服务器存在源码泄露漏洞，可以将PHP文件作为静态文件直接输出源码  </p><p>随意访问一个不存在的php，触发以下页面，这算是php -S启动服务的一个标志：（页面来自封神台的图床题）</p><p>![](PHP_=7.4.21 Development Server源码泄露漏洞/1745475646348-eadb9113-2888-4365-b623-c1760e25cf3e.png)</p><p>我们这里就结合这道题来介绍这个漏洞的利用</p><p>我们bp抓包发送repeater来准备读取unzip.php的源码，一定能要关闭repeater的自动更新Content-Length  以及显示回车换行，方便数据包的构造。</p><p>![](PHP_=7.4.21 Development Server源码泄露漏洞/1745476282943-e7089b83-167d-4ec0-a8bc-79671a3362f5.png)</p><p>这里就读取到了源码但是不在接着往下写，想往下看这题去看我的wp</p><p>这里先上poc并附上解释</p><pre class="line-numbers language-language-http"><code class="language-language-http">GET /unzip.php HTTP/1.1Host: 159.138.63.173:8085GET /AAA.txt Http/1.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p> ps：这里一定要换行  </p><p>第一个GET后的/unzip.php是直接访问已存在的unzip.php文件</p><p>PHP源码中的php_cli_server_request_translate_vpath函数将请求的PHP文件的路径转换为文件系统上的</p><p>完整路径。</p><p>如果请求的文件是一个目录，它会检查是否存在索引文件，如index.php或 index.html，并使用其中一个文</p><p>件的路径(如果找到的话)。</p><p>第二个GET后的/请求的是目录而不是文件。</p><p>此PHP版本提供的代码包括一个检查，以确定请求的文件是应被视为静态文件还是作为PHP文件执行。</p><p>这是通过检查文件的扩展名来完成的。如果扩展不是.php或.PHP，或者如果扩展名的长度不等于3,则该文件被视为静态文件，</p><p><strong>因此如果我们把第二个GET请求的内容改为类似1.txt的文件时，php源码将会被以静态文件的方式泄露(即直接访问获取)</strong></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> php特性 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Web </tag>
-            
-            <tag> PHP </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Jinjia2-SSTI请求头回显</title>
       <link href="/2025/04/29/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/"/>
       <url>/2025/04/29/Jinjia2-SSTI%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%9B%9E%E6%98%BE/</url>
@@ -144,6 +117,33 @@
             <tag> Web </tag>
             
             <tag> SSTI </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PHP_=7.4.21 Development Server源码泄露漏洞</title>
+      <link href="/2025/04/29/PHP_=7.4.21%20Development%20Server%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/"/>
+      <url>/2025/04/29/PHP_=7.4.21%20Development%20Server%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</url>
+      
+        <content type="html"><![CDATA[<p>在复现第八届封神台ctf第一次接触到了<code>php -S服务启动后造成代码泄露</code>的漏洞</p><p>PHP从5.4开始，就提供了一个内置的web服务器，主要是用来做本地的开发用的。<br>前提：php已经加入到本地电脑的环境变量中</p><p>cd 项目目录</p><p>php -S localhost:8080  </p><p>通过<code>php -S</code>开起的内置WEB服务器存在源码泄露漏洞，可以将PHP文件作为静态文件直接输出源码  </p><p>随意访问一个不存在的php，触发以下页面，这算是php -S启动服务的一个标志：（页面来自封神台的图床题）</p><p>![](PHP_=7.4.21 Development Server源码泄露漏洞/1745475646348-eadb9113-2888-4365-b623-c1760e25cf3e.png)</p><p>我们这里就结合这道题来介绍这个漏洞的利用</p><p>我们bp抓包发送repeater来准备读取unzip.php的源码，一定能要关闭repeater的自动更新Content-Length  以及显示回车换行，方便数据包的构造。</p><p>![](PHP_=7.4.21 Development Server源码泄露漏洞/1745476282943-e7089b83-167d-4ec0-a8bc-79671a3362f5.png)</p><p>这里就读取到了源码但是不在接着往下写，想往下看这题去看我的wp</p><p>这里先上poc并附上解释</p><pre class="line-numbers language-language-http"><code class="language-language-http">GET /unzip.php HTTP/1.1Host: 159.138.63.173:8085GET /AAA.txt Http/1.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p> ps：这里一定要换行  </p><p>第一个GET后的/unzip.php是直接访问已存在的unzip.php文件</p><p>PHP源码中的php_cli_server_request_translate_vpath函数将请求的PHP文件的路径转换为文件系统上的</p><p>完整路径。</p><p>如果请求的文件是一个目录，它会检查是否存在索引文件，如index.php或 index.html，并使用其中一个文</p><p>件的路径(如果找到的话)。</p><p>第二个GET后的/请求的是目录而不是文件。</p><p>此PHP版本提供的代码包括一个检查，以确定请求的文件是应被视为静态文件还是作为PHP文件执行。</p><p>这是通过检查文件的扩展名来完成的。如果扩展不是.php或.PHP，或者如果扩展名的长度不等于3,则该文件被视为静态文件，</p><p><strong>因此如果我们把第二个GET请求的内容改为类似1.txt的文件时，php源码将会被以静态文件的方式泄露(即直接访问获取)</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php特性 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Web </tag>
+            
+            <tag> PHP </tag>
             
         </tags>
       
