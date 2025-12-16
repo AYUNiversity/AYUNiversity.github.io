@@ -112,9 +112,9 @@
       
         <tags>
             
-            <tag> SSTI </tag>
-            
             <tag> Web </tag>
+            
+            <tag> SSTI </tag>
             
         </tags>
       
@@ -247,9 +247,9 @@
       
         <tags>
             
-            <tag> Web </tag>
-            
             <tag> Gopher协议在SSRF漏洞中的深入研究 </tag>
+            
+            <tag> Web </tag>
             
         </tags>
       
