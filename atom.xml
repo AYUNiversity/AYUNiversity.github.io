@@ -6,7 +6,7 @@
   <link href="https://example.com/atom.xml" rel="self"/>
   
   <link href="https://example.com/"/>
-  <updated>2025-05-09T11:42:25.525Z</updated>
+  <updated>2025-12-16T12:57:08.571Z</updated>
   <id>https://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://example.com/2025/05/09/SSRF%E6%89%93Fastcgi/"/>
     <id>https://example.com/2025/05/09/SSRF%E6%89%93Fastcgi/</id>
     <published>2025-05-09T11:40:12.000Z</published>
-    <updated>2025-05-09T11:42:25.525Z</updated>
+    <updated>2025-12-16T12:57:08.571Z</updated>
     
     
       
@@ -89,34 +89,6 @@
     <category term="Web" scheme="https://example.com/tags/Web/"/>
     
     <category term="pyjail" scheme="https://example.com/tags/pyjail/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vm沙箱逃逸</title>
-    <link href="https://example.com/2025/05/09/vm%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/"/>
-    <id>https://example.com/2025/05/09/vm%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/</id>
-    <published>2025-05-09T11:00:55.000Z</published>
-    <updated>2025-05-09T11:09:19.229Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;如果想要实现沙箱的隔离作用，我们是不是可以创建一个新的作用域，让代码在这个新的作用域里面去运行，这样就和其他的作用域进行了隔离，这也就是vm模块运行的原理，先来了解几个常用的vm模块的API。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;vm.runinThisContext(code)</summary>
-        
-      
-    
-    
-    
-    <category term="沙箱逃逸" scheme="https://example.com/categories/%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/"/>
-    
-    
-    <category term="Web" scheme="https://example.com/tags/Web/"/>
-    
-    <category term="vm沙箱逃逸" scheme="https://example.com/tags/vm%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/"/>
     
   </entry>
   
