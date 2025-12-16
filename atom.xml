@@ -6,7 +6,7 @@
   <link href="https://example.com/atom.xml" rel="self"/>
   
   <link href="https://example.com/"/>
-  <updated>2025-12-16T12:57:08.571Z</updated>
+  <updated>2025-12-16T13:30:53.327Z</updated>
   <id>https://example.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LD_PRELOAD</title>
+    <link href="https://example.com/2025/12/16/LD-PRELOAD/"/>
+    <id>https://example.com/2025/12/16/LD-PRELOAD/</id>
+    <published>2025-12-16T13:04:06.000Z</published>
+    <updated>2025-12-16T13:30:53.327Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;M申给我发了两道题，其中一道就是关于LD_PRELOAD的，之前面vn的时候，infer问了我相关的问题没答上来，正好学习一下&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-language-php&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="ctf" scheme="https://example.com/categories/ctf/"/>
+    
+    
+    <category term="Web" scheme="https://example.com/tags/Web/"/>
+    
+  </entry>
   
   <entry>
     <title>SSRF打Fastcgi</title>
